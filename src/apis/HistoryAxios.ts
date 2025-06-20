@@ -3,7 +3,7 @@ import AxiosInstance from './AxiosInstance';
 // 알림 목록 조회
 export const getNotifications = async () => {
   try {
-    const { data } = await AxiosInstance.get('notifications');
+    const { data } = await AxiosInstance.get('/notifications');
     return data;
   } catch (error) {
     throw new Error(`${error}`);
