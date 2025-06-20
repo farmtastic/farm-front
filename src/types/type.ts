@@ -7,3 +7,14 @@ export type Children = {
 export interface SensorDataProps {
   zoneId: number;
 }
+
+export interface RuleData {
+  ruleId: number;
+  type: string;
+  threshold: number;
+}
+
+export interface RulesProps {
+  ruleId: number;
+  newData?: RuleData;
+}
