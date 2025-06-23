@@ -5,7 +5,7 @@ const Card = ({ children, type }: CardProps) => {
   const cardDynamicCss = {
     sensors: 'w-210 h-210 justify-center',
     controls: 'w-full h-140',
-    graghs: 'w-210 h-210',
+    graphs: 'w-210 h-210',
   };
 
   return (
