@@ -3,7 +3,7 @@ import Card from '../UI/Card';
 
 const SensorData = () => {
   return (
-    <article className="h-sensor bg-blue-200">
+    <article className="bg-blue-200 mb-card">
       <ArticleTitle>센서 데이터</ArticleTitle>
       <div className="flex justify-between">
         <Card type="sensors">수위</Card>
