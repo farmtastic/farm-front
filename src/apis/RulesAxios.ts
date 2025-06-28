@@ -1,5 +1,5 @@
 import AxiosInstance from './AxiosInstance';
-import type { RulesProps } from '@/types/type';
+import type { RuleData, RulesProps } from '@/types/type';
 
 export const getRules = async () => {
   try {
@@ -10,8 +10,25 @@ export const getRules = async () => {
   }
 };
 
-export const createRules = async ({ newData }: RulesProps) => {
+export const createRules = async ({
+  ruleName,
+  sensorId,
+  conditionOp,
+  threshold,
+  actuatorId,
+  command,
+  active,
+}: RuleData) => {
   try {
+    const newData = {
+      ruleName,
+      sensorId,
+      conditionOp,
+      threshold,
+      actuatorId,
+      command,
+      active,
+    };
     const { data } = await AxiosInstance.post('/rules', newData);
     return data;
   } catch (error) {
@@ -21,7 +38,11 @@ export const createRules = async ({ newData }: RulesProps) => {
 
 export const updateRules = async ({ ruleId, newData }: RulesProps) => {
   try {
-    const { data } = await AxiosInstance.put(`/rules/${ruleId}`, newData);
+    console.log('수정할 update 데이터', newData);
+    const { data } = await AxiosInstance.put(
+      `/rules/update/${ruleId}`,
+      newData
+    );
     return data;
   } catch (error) {
     throw new Error(`${error}`);
