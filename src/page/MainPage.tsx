@@ -16,12 +16,16 @@ import type { RuleData, RulesProps } from '@/types/type';
 const MainPages = () => {
   // 테스트 데이터
   const newCreateData = {
-    ruleId: 4,
-    type: 'rules_4',
+    ruleName: 'test1',
+    sensorId: 1,
+    conditionOp: '테스트op',
     threshold: 100,
+    actuatorId: 7,
+    command: '테스트cd',
+    active: true,
   };
   const updateData = {
-    threshold: 50,
+    threshold: 150,
   };
 
   /* 테스트용으로 쿼리문을 한곳에 모아 사용 중이며, 추후 컴포넌트 단에서 개별 호출 예정 */
@@ -30,40 +34,35 @@ const MainPages = () => {
   const { data: SensorData } = useQuery({
     queryKey: ['latestSensorData'],
     queryFn: () => getLatestSensorData({ zoneId: 1 }),
-    enabled: false,
   });
 
   // 과거 이력 조회 쿼리
   const { data: HistoryData } = useQuery({
     queryKey: ['dataHistory'],
     queryFn: () => getDataHistory({ zoneId: 1 }),
-    enabled: false,
   });
 
   // 알림 목록 조회 쿼리
   const { data: NotiData } = useQuery({
     queryKey: ['notification'],
     queryFn: () => getNotifications(),
-    enabled: false,
   });
 
   // 제어 이력 조회 쿼리
   const { data: LogsData } = useQuery({
     queryKey: ['logs'],
     queryFn: () => getLogs(),
-    enabled: false,
   });
 
   // 규칙 조회 쿼리
   const { data: rulesData } = useQuery({
     queryKey: ['rulesData'],
     queryFn: () => getRules(),
-    enabled: false,
   });
 
   // 규칙 생성 mutation
   const createMutation = useMutation({
-    mutationFn: (newData: RuleData) => createRules(newData),
+    mutationFn: (newData: RuleData) => createRules({ ...newData }),
     onSuccess: (data) => {
       console.log('생성 성공:', data);
       alert(data.message);
@@ -101,9 +100,9 @@ const MainPages = () => {
     },
   });
 
-  console.log('sensor', SensorData, HistoryData);
-  console.log('history', NotiData, LogsData);
-  console.log('rules', rulesData, LogsData);
+  console.log('sensor', SensorData, '과거 이력', HistoryData);
+  console.log('history', '알림', NotiData, '로그', LogsData);
+  console.log('rules', '규칙', rulesData, '제어이력', LogsData);
 
   return (
     <Background>
@@ -114,10 +113,10 @@ const MainPages = () => {
       <button
         onClick={() => {
           const newData = {
-            ...newCreateData,
-            updateData,
+            ...rulesData[0],
+            ...updateData,
           };
-          updateMutation.mutate({ ruleId: 2, newData });
+          updateMutation.mutate({ ruleId: 6, newData });
         }}
       >
         update
