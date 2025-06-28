@@ -22,3 +22,11 @@ export interface RulesProps {
   ruleId?: number;
   newData?: RuleData;
 }
+
+type CardTypes = 'sensors' | 'controls' | 'graphs';
+
+export interface Type {
+  type: CardTypes;
+}
+
+export type CardProps = Children & Type;

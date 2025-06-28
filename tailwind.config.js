@@ -8,6 +8,13 @@ export default {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        card: '30px',
+      },
+      margin: {
+        card: '62px',
+      },
+      borderColor: {
+        card: '#A1A1A1',
       },
       colors: {
         BackgroundColor: '#F9FAFB',
@@ -59,13 +66,18 @@ export default {
         rightSection: '40%',
         leftSection: '60%',
         divider: '2px',
+        210: '280px',
+        722: '722px',
       },
       height: {
         header: '170px',
         sensor: '420px',
+        210: '280px',
+        140: '140px',
       },
       fontSize: {
         header: '64px',
+        articleTitle: '40px',
       },
     },
   },
