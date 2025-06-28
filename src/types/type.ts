@@ -9,12 +9,16 @@ export interface SensorDataProps {
 }
 
 export interface RuleData {
-  ruleId: number;
-  type: string;
+  ruleName: string;
+  sensorId: number;
+  conditionOp: string;
   threshold: number;
+  actuatorId: number;
+  command: string;
+  active: boolean;
 }
 
 export interface RulesProps {
-  ruleId: number;
+  ruleId?: number;
   newData?: RuleData;
 }
