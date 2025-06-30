@@ -77,7 +77,7 @@ export default {
       },
       fontSize: {
         header: '64px',
-        articleTitle: '40px',
+        articleTitle: '45px',
       },
     },
   },
