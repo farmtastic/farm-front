@@ -3,7 +3,7 @@ import Header from '@/components/UI/Header';
 import Main from '@/components/UI/Main';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { getLatestSensorData, getDataHistory } from '@/apis/SensorAxios';
+import { getDataHistory } from '@/apis/SensorAxios';
 import { getNotifications, getLogs } from '@/apis/HistoryAxios';
 import {
   getRules,
@@ -29,12 +29,6 @@ const MainPages = () => {
   };
 
   /* 테스트용으로 쿼리문을 한곳에 모아 사용 중이며, 추후 컴포넌트 단에서 개별 호출 예정 */
-
-  // 최신 상태 조회 쿼리
-  const { data: SensorData } = useQuery({
-    queryKey: ['latestSensorData'],
-    queryFn: () => getLatestSensorData({ zoneId: 1 }),
-  });
 
   // 과거 이력 조회 쿼리
   const { data: HistoryData } = useQuery({
@@ -100,7 +94,7 @@ const MainPages = () => {
     },
   });
 
-  console.log('sensor', SensorData, '과거 이력', HistoryData);
+  console.log('sensor', '과거 이력', HistoryData);
   console.log('history', '알림', NotiData, '로그', LogsData);
   console.log('rules', '규칙', rulesData, '제어이력', LogsData);
 
