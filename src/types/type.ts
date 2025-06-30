@@ -4,7 +4,7 @@ export type Children = {
   children: React.ReactNode;
 };
 
-export interface SensorDataProps {
+export interface SensorDataAPIProps {
   zoneId: number;
 }
 
@@ -30,3 +30,7 @@ export interface Type {
 }
 
 export type CardProps = Children & Type;
+
+export interface SensorDataProps {
+  data: number;
+}
