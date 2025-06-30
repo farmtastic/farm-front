@@ -1,14 +1,20 @@
 import ArticleTitle from '../UI/ArticleTitle';
-import Card from '../UI/Card';
+import Illuminance from './Illuminance';
+import LatestDataUpdate from './LatestDataUpdate';
+import PH from './pH';
+import WaterLevel from './WaterLevel';
 
 const SensorData = () => {
   return (
     <article className="bg-blue-200 mb-card">
-      <ArticleTitle>센서 데이터</ArticleTitle>
+      <div className="flex justify-between items-center">
+        <ArticleTitle>센서 데이터</ArticleTitle>
+        <LatestDataUpdate />
+      </div>
       <div className="flex justify-between">
-        <Card type="sensors">수위</Card>
-        <Card type="sensors">조도</Card>
-        <Card type="sensors">pH</Card>
+        <WaterLevel />
+        <Illuminance />
+        <PH />
       </div>
     </article>
   );
