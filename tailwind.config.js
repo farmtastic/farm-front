@@ -12,6 +12,7 @@ export default {
       },
       margin: {
         card: '62px',
+        contentsCard: '45px',
       },
       borderColor: {
         card: '#A1A1A1',
