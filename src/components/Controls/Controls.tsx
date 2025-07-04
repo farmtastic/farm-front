@@ -4,11 +4,11 @@ import SettingButton from './SettingButton';
 
 const Controls = () => {
   return (
-    <article>
+    <article className="m-contentsCard">
       <ArticleTitle>제어</ArticleTitle>
       <div className="flex flex-col justify-between">
         <Card type="controls">
-          <div className="flex ">
+          <div className="flex">
             <div>수위제어</div>
             <SettingButton />
           </div>
