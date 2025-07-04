@@ -1,7 +1,7 @@
 import ArticleTitle from '../UI/ArticleTitle';
 import Illuminance from './Illuminance';
 import LatestDataUpdate from './LatestDataUpdate';
-import PH from './pH';
+import PH from './PH';
 import WaterLevel from './WaterLevel';
 
 // import { useQuery } from '@tanstack/react-query';
@@ -28,11 +28,11 @@ const SensorData = () => {
 */
   return (
     <article className="mb-card">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center m-contentsCard">
         <ArticleTitle>센서 데이터</ArticleTitle>
         <LatestDataUpdate />
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between m-contentsCard">
         <WaterLevel data={water} />
         <Illuminance data={sun} />
         <PH data={pH} />
