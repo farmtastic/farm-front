@@ -4,21 +4,26 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-        card: '30px',
-      },
       margin: {
         card: '62px',
         contentsCard: '45px',
+        graphT: '2.2rem',
+        graphB: '2rem',
+      },
+      padding: {
+        contentsCard: '1px',
+        '45px': '45px',
       },
       borderColor: {
         card: '#A1A1A1',
       },
+      borderRadius: {
+        contentsCard: '10px',
+        card: '30px',
+      },
       colors: {
-        BackgroundColor: '#F9FAFB',
+        BackgroundColor: '#11111C',
+        ContentsColor: '#1C1C2A',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -69,12 +74,14 @@ export default {
         divider: '2px',
         210: '280px',
         722: '722px',
+        graph: '505px',
       },
       height: {
         header: '170px',
         sensor: '420px',
         210: '280px',
         140: '140px',
+        graph: '250px',
       },
       fontSize: {
         header: '64px',
