@@ -27,7 +27,7 @@ const SensorData = () => {
   });
 */
   return (
-    <article className="mb-card">
+    <article className="mb-card py-contentsCard bg-ContentsColor rounded-contentsCard">
       <div className="flex justify-between items-center m-contentsCard">
         <ArticleTitle>센서 데이터</ArticleTitle>
         <LatestDataUpdate />
