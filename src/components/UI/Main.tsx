@@ -1,26 +1,16 @@
 import SensorData from '../SensorData/SensorData';
 import Controls from '../Controls/Controls';
-import ArticleTitle from './ArticleTitle';
-import ContentsBox from './ContentsBox';
+import Graph from '../Graph/Graph';
 
 const Main = () => {
   return (
-    <main className="flex-1 bg-green-50 flex">
-      <section className="w-leftSection bg-red-100 m-14">
-        <ContentsBox>
-          <SensorData />
-        </ContentsBox>
-        <ContentsBox>
-          <Controls />
-        </ContentsBox>
+    <main className="flex-1 flex pb-14 text-white">
+      <section className="w-leftSection mx-14">
+        <SensorData />
+        <Controls />
       </section>
-      {/* <Divider /> */}
-      <section className="w-rightSection bg-yellow-100 mr-14">
-        <article>
-          <ContentsBox>
-            <ArticleTitle>수치 그래프</ArticleTitle>
-          </ContentsBox>
-        </article>
+      <section className="w-rightSection mr-14">
+        <Graph />
       </section>
     </main>
   );
