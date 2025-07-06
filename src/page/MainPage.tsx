@@ -101,23 +101,6 @@ const MainPages = () => {
   return (
     <Background>
       <Header />
-      <button onClick={() => createMutation.mutate(newCreateData)}>
-        create
-      </button>
-      <button
-        onClick={() => {
-          const newData = {
-            ...rulesData[0],
-            ...updateData,
-          };
-          updateMutation.mutate({ ruleId: 6, newData });
-        }}
-      >
-        update
-      </button>
-      <button onClick={() => deleteMutation.mutate({ ruleId: 1 })}>
-        delete
-      </button>
       <Main />
     </Background>
   );
