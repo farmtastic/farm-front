@@ -33,4 +33,29 @@ export type CardProps = Children & Type;
 
 export interface SensorDataProps {
   data: number;
+  history: number;
+}
+
+export interface ModalType {
+  type: 'water' | 'illuminance' | 'PH';
+  isOpen: boolean;
+  closeModal: () => void;
+  data: number;
+  onSave: (saveData: string, id: number) => void; // 임시로 string 타입으로 적어놓았음.
+  onDelete: (id: number) => void;
+  id: number;
+}
+
+export interface STButtonType {
+  type: 'water' | 'illuminance' | 'PH';
+  data: number;
+  onSave: (saveData: string, id: number) => void; // 임시로 string 타입으로 적어놓았음.
+  onDelete: (id: number) => void;
+  id: number;
+}
+
+export interface ThresholdType {
+  type: 'water' | 'illuminance' | 'PH';
+  data: number;
+  history: number;
 }
