@@ -6,9 +6,9 @@ export default {
     extend: {
       margin: {
         card: '62px',
-        contentsCard: '45px',
+        contentsCard: '2.344vw',
         graphT: '2.2rem',
-        graphB: '2rem',
+        graphB: '1.2rem',
       },
       padding: {
         contentsCard: '1px',
@@ -67,12 +67,13 @@ export default {
       },
       minHeight: {
         main: '854px',
+        article: '1480px',
       },
       width: {
         rightSection: '40%',
         leftSection: '60%',
         divider: '2px',
-        210: '280px',
+        210: '14.583vw',
         722: '722px',
         graph: '505px',
       },
@@ -85,7 +86,11 @@ export default {
       },
       fontSize: {
         header: '64px',
-        articleTitle: '45px',
+        articleTitle: '2.344vw',
+      },
+      flex: {
+        4: '4 4 0%',
+        6: '6 6 0%',
       },
     },
   },
