@@ -10,7 +10,7 @@ const Card = ({ children, type }: CardProps) => {
 
   return (
     <div
-      className={`${cardDynamicCss[type]} bg-BackgroundColor rounded-card  mt-card mb-9 flex items-center`}
+      className={`${cardDynamicCss[type]} bg-BackgroundColor rounded-card mx-1 mt-card mb-9 flex items-center`}
     >
       {children}
     </div>
