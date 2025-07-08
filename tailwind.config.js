@@ -93,6 +93,15 @@ export default {
         4: '4 4 0%',
         6: '6 6 0%',
       },
+      keyframes: {
+        'spin-once': {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
+      },
+      animation: {
+        'spin-once': 'spin-once 1s ease-in-out forwards',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
