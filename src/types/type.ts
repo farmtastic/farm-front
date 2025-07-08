@@ -59,3 +59,8 @@ export interface ThresholdType {
   data: number;
   history: number;
 }
+
+export interface DrawerProps {
+  showDrawer: boolean;
+  onClose: () => void;
+}
