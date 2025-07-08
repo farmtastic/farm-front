@@ -6,7 +6,7 @@ const LatestDataUpdate = () => {
     <div className="text-3xl flex items-center">
       <span>최신 업데이트: {time}</span>
       <button className="w-5 bg-transparent mx-2">
-        <UpdateIcon className="w-5 h-5" />
+        <UpdateIcon className="w-8 h-8 hover:animate-spin-once" />
       </button>
     </div>
   );
