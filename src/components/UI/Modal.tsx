@@ -61,20 +61,19 @@ const Modal = ({
         <span className="mr-2">현재 임계값:</span>
         <span>{data}</span>
       </div>
-      <div className="flex flex-col justify-center items-center text-lg text-ModalSmText">
-        <div className="mt-3">
+      <div className="flex flex-col justify-center items-start text-lg text-ModalSmText">
+        <div className="mt-3 flex">
           <span>
             {type === 'water' ? '수위' : type === 'illuminance' ? '조도' : 'pH'}
           </span>
           <span>임계값 설정</span>
         </div>
-        <div className="flex items-center justify-center mb-6 p-6 rounded-2x w-full max-w-md mx-4">
+        <div className="flex items-center justify-between mb-6 px-3 py-1 rounded-contentsCard border border-gray-300 rounded-2x w-full max-w-md mr-4 mt-2">
           <input
             type="number"
-            min="0"
             onChange={(e) => setValue(Number(e.target.value))}
             placeholder={`${value}`}
-            className="w-24 bg-transparent border-b-2 border-gray-100 text-3xl font-medium text-white text-center focus:border-green-400 focus:outline-none transition"
+            className="w-full bg-transparent pl-2 border-gray-100 text-2xl font-medium text-white focus:border-green-400 focus:outline-none transition"
           />
           <span className="ml-2 text-xl text-gray-300">
             {type === 'water' ? 'm' : type === 'illuminance' ? 'lux' : 'pH'}
