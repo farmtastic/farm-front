@@ -1,41 +1,66 @@
 import ArticleTitle from '../UI/ArticleTitle';
 import Card from '../UI/Card';
 import SettingButton from './SettingButton';
-// import type { RuleData, RulesProps } from '@/types/type';
+import type { RuleData, RulesProps } from '@/types/type';
 
-// import { useQuery, useMutation } from '@tanstack/react-query';
-// import {
-//   getRules,
-//   updateRules,
-//   deleteRules,
-//   createRules,
-// } from '@/apis/RulesAxios';
-
-const dummyData = [{}];
+import { useQuery, useMutation } from '@tanstack/react-query';
+import {
+  getRules,
+  updateRules,
+  deleteRules,
+  createRules,
+} from '@/apis/RulesAxios';
 
 const Controls = () => {
   // 테스트 데이터
-  const rulesData = {
-    ruleName: 'test1',
-    sensorId: 1,
-    conditionOp: '테스트op',
-    threshold: 100,
-    actuatorId: 7,
-    command: '테스트cd',
-    active: true,
-  };
-  /*
+  const rulesData = [
+    {
+      ruleName: 'water',
+      sensorId: 1,
+      conditionOp: '테스트op',
+      threshold: 100,
+      actuatorId: 7,
+      command: '테스트cd',
+      active: true,
+    },
+    {
+      ruleName: 'illuminance',
+      sensorId: 2,
+      conditionOp: '조도 테스트',
+      threshold: 600,
+      actuatorId: 8,
+      command: '조도 테스트',
+      active: true,
+    },
+    {
+      ruleName: 'pH',
+      sensorId: 3,
+      conditionOp: 'pH 테스트',
+      threshold: 5.6,
+      actuatorId: 9,
+      command: 'pH 테스트',
+      active: true,
+    },
+  ];
+
+  const water = rulesData.filter((item) => item.ruleName === 'water');
+  const illuminance = rulesData.filter(
+    (item) => item.ruleName === 'illuminance'
+  );
+  const pH = rulesData.filter((item) => item.ruleName === 'pH');
+  console.log('물제어', water, illuminance, pH);
+
   // 업데이트 데이터
   const updateData = {
     threshold: 150,
   };
 
-  // 규칙 조회 쿼리
+  //규칙 조회 쿼리
   const { data } = useQuery({
     queryKey: ['rulesData'],
     queryFn: () => getRules(),
   });
-
+  console.log(data);
   // 규칙 생성 mutation
   const createMutation = useMutation({
     mutationFn: (newData: RuleData) => createRules({ ...newData }),
@@ -75,14 +100,14 @@ const Controls = () => {
       alert('규칙 삭제 실패');
     },
   });
-*/
+
   // const onSave = (data, id) => {
-  //   if (dummyData.ruleId) { 실제 데이터로 조건 수정 필요
+  //   if (water.length !== 0) { 실제 데이터로 조건 수정 필요
   //     const newData = {
-  //       ...rulesData[ruleId],
+  //       ...water,
   //       ...updateData,
   //     };
-  //     updateMutation.mutate({ ruleId: dummyData.ruleId, newData });
+  //     updateMutation.mutate({ ruleId: id, newData });
   //   } else {
   //     createMutation.mutate(newCreateData);
   //   }
@@ -98,14 +123,14 @@ const Controls = () => {
           <div className="m-16 flex justify-between flex-1">
             <div className="text-4xl">수위 제어</div>
             <SettingButton
-              id={rulesData.sensorId}
+              id={1}
               onSave={() => {
-                if (dummyData.length !== 0) console.log('update');
+                if (water.length !== 0) console.log('update');
                 else console.log('create');
               }}
               onDelete={(id) => console.log('delete id', id)}
               type="water"
-              data={5}
+              data={water}
             />
           </div>
         </Card>
@@ -120,7 +145,7 @@ const Controls = () => {
               }}
               onDelete={(id) => console.log('delete id', id)}
               type="illuminance"
-              data={580}
+              data={illuminance}
             />
           </div>
         </Card>
@@ -135,7 +160,7 @@ const Controls = () => {
               }}
               onDelete={(id) => console.log('delete id', id)}
               type="PH"
-              data={4.9}
+              data={rulesData.filter((item) => item.ruleName === 'PH')}
             />
           </div>
         </Card>
