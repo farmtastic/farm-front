@@ -1,25 +1,26 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { FaRegBell } from 'react-icons/fa';
 import LatestDataUpdate from '../SensorData/LatestDataUpdate';
-import Drawer from './Drawer';
+import CustomDrawer from './CustomDrawer';
 
 const Header = () => {
-  const [showDrawer, setShowDrawer] = useState<boolean>(false);
+  // const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
-  const onShowDrawer = () => {
-    setShowDrawer(true);
-  };
+  // const onShowDrawer = () => {
+  //   setShowDrawer(true);
+  // };
 
-  const onCloseDrawer = () => {
-    setShowDrawer(false);
-  };
+  // const onCloseDrawer = () => {
+  //   setShowDrawer(false);
+  // };
 
   return (
     <header className="h-header flex justify-between items-center px-14 text-white">
       <div className="text-header">Farmtastic</div>
       <LatestDataUpdate />
-      <FaRegBell onClick={onShowDrawer} size={40} />
-      {showDrawer && <Drawer showDrawer={showDrawer} onClose={onCloseDrawer} />}
+      {/* <FaRegBell onClick={onShowDrawer} size={40} /> */}
+      <CustomDrawer />
+      {/* {showDrawer && <Drawer showDrawer={showDrawer} onClose={onCloseDrawer} />} */}
     </header>
   );
 };
