@@ -8,11 +8,11 @@ const Modal = ({
   type,
   isOpen,
   closeModal,
-  data,
+  data = [],
   onDelete,
   onSave,
 }: ModalType) => {
-  const [value, setValue] = useState<number>(data);
+  const [value, setValue] = useState<number>(data?.[0]?.threshold ?? 0);
   console.log(id);
   const customStyle: Styles = {
     overlay: {
@@ -59,7 +59,7 @@ const Modal = ({
       </div>
       <div className="text-lg">
         <span className="mr-2">현재 임계값:</span>
-        <span>{data}</span>
+        <span>{data[0]?.threshold ?? '없음'}</span>
       </div>
       <div className="flex flex-col justify-center items-start text-lg text-ModalSmText">
         <div className="mt-3 flex">
