@@ -36,11 +36,21 @@ export interface SensorDataProps {
   history: number;
 }
 
+type ControlsDataType = {
+  ruleName: string;
+  sensorId: number;
+  conditionOp: string;
+  threshold: number;
+  actuatorId: number;
+  command: string;
+  active: boolean;
+};
+
 export interface ModalType {
   type: 'water' | 'illuminance' | 'PH';
   isOpen: boolean;
   closeModal: () => void;
-  data: number;
+  data: ControlsDataType[];
   onSave: (saveData: string, id: number) => void; // 임시로 string 타입으로 적어놓았음.
   onDelete: (id: number) => void;
   id: number;
@@ -48,7 +58,7 @@ export interface ModalType {
 
 export interface STButtonType {
   type: 'water' | 'illuminance' | 'PH';
-  data: number;
+  data: ControlsDataType[];
   onSave: (saveData: string, id: number) => void; // 임시로 string 타입으로 적어놓았음.
   onDelete: (id: number) => void;
   id: number;
