@@ -27,6 +27,7 @@ export default {
         ModalSmText: '#7f7f7f',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        drawer: '#F9FAFB',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -77,6 +78,7 @@ export default {
         210: '14.583vw',
         722: '722px',
         graph: '505px',
+        drawer: '500px',
       },
       height: {
         header: '170px',
@@ -84,6 +86,7 @@ export default {
         210: '280px',
         140: '140px',
         graph: '250px',
+        drawerList: '100px',
       },
       fontSize: {
         header: '64px',
