@@ -1,4 +1,5 @@
 import React from 'react';
+import type { TooltipProps } from 'recharts';
 
 export type Children = {
   children: React.ReactNode;
@@ -51,7 +52,7 @@ export interface ModalType {
   isOpen: boolean;
   closeModal: () => void;
   data: ControlsDataType[];
-  onSave: (saveData: string, id: number) => void; // 임시로 string 타입으로 적어놓았음.
+  onSave: (saveData: number, id: number) => void; // 임시로 string 타입으로 적어놓았음.
   onDelete: (id: number) => void;
   id: number;
 }
@@ -59,7 +60,7 @@ export interface ModalType {
 export interface STButtonType {
   type: 'water' | 'illuminance' | 'PH';
   data: ControlsDataType[];
-  onSave: (saveData: string, id: number) => void; // 임시로 string 타입으로 적어놓았음.
+  onSave: (saveData: number, id: number) => void; // 임시로 string 타입으로 적어놓았음.
   onDelete: (id: number) => void;
   id: number;
 }
@@ -73,4 +74,28 @@ export interface ThresholdType {
 export interface DrawerProps {
   showDrawer: boolean;
   onClose: () => void;
+}
+
+export interface GraphDataType {
+  timestamp: string;
+  value: number;
+  threshold: number;
+  type: string;
+}
+
+export interface CustomGraphProps {
+  data: GraphDataType[];
+  type: 'WATER_LEVEL' | 'ILLUMINANCE' | 'PH';
+}
+
+// CustomTooltip의 Props 타입
+export interface CustomTooltipProps extends TooltipProps<number, string> {
+  payload?: Array<{
+    payload: {
+      timestamp: string;
+      value: number;
+      threshold: number;
+      type: string;
+    };
+  }>;
 }
