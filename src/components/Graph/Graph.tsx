@@ -1,5 +1,5 @@
 import ArticleTitle from '../UI/ArticleTitle';
-import { LineChart, ResponsiveContainer } from 'recharts';
+import CustomGraph from './CustomGraph';
 // import { useQuery } from '@tanstack/react-query';
 // import { getDataHistory } from '@/apis/SensorAxios';
 
@@ -35,21 +35,29 @@ const Graph = () => {
 
   // console.log(HistoryData);
 
+  // threshold와 type 속성 필요. type은 프론트에서 직접 추가하면 될 것 같고 threshold을 같이 보내줄 수 있냐고 여쭤봐야됨.
+  const waterHistory = DummyData.historyValues.WATER_LEVEL.map((d) => ({
+    ...d,
+    type: 'WATER_LEVEL',
+    threshold: 7,
+  }));
+  const illuminanceHistory = DummyData.historyValues.ILLUMINANCE.map((d) => ({
+    ...d,
+    type: 'WATER_LEVEL',
+    threshold: 7000,
+  }));
+  const pHHistory = DummyData.historyValues.PH.map((d) => ({
+    ...d,
+    type: 'WATER_LEVEL',
+    threshold: 5.5,
+  }));
+
   return (
     <article className="p-45px rounded-contentsCard bg-ContentsColor">
       <ArticleTitle>수치 그래프</ArticleTitle>
-      <div className="text-3xl mb-graphB mt-graphT">수위</div>
-      <ResponsiveContainer width="100%" height={350}>
-        <LineChart className="bg-BackgroundColor rounded-card outline-none"></LineChart>
-      </ResponsiveContainer>
-      <div className="text-3xl mb-graphB mt-graphT">조도</div>
-      <ResponsiveContainer width="100%" height={350}>
-        <LineChart className="bg-BackgroundColor rounded-card outline-none"></LineChart>
-      </ResponsiveContainer>
-      <div className="text-3xl mb-graphB mt-graphT">pH</div>
-      <ResponsiveContainer width="100%" height={350}>
-        <LineChart className="bg-BackgroundColor rounded-card outline-none"></LineChart>
-      </ResponsiveContainer>
+      <CustomGraph type="WATER_LEVEL" data={waterHistory} />
+      <CustomGraph type="ILLUMINANCE" data={illuminanceHistory} />
+      <CustomGraph type="PH" data={pHHistory} />
     </article>
   );
 };
