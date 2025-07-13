@@ -14,7 +14,7 @@ const MainPages = () => {
     queryFn: () => getNotifications(),
   });
 
-  console.log('history', '알림', NotiData);
+  // console.log('history', '알림', NotiData);
 
   return (
     <Background>
