@@ -49,7 +49,7 @@ const SensorData = () => {
     queryFn: () => getDataHistory({ zoneId: 1 }),
   });
 
-  console.log(sensorData, isFetching, isLoading, HistoryData);
+  // console.log(sensorData, isFetching, isLoading, HistoryData);
 
   // 실시간 수치들을 넘겨주면서 과거 이력 조회api의 가장 최신 데이터도 같이 넘겨줌
   // 가장 최신 데이터를 이용해서 이전 수치에 비해 얼마나 증/감/유지 되었는지를 표시.
