@@ -48,7 +48,7 @@ const Controls = () => {
     (item) => item.ruleName === 'illuminance'
   );
   const pH = rulesData.filter((item) => item.ruleName === 'pH');
-  console.log('물제어', water, illuminance, pH);
+  console.log('임계값 조회', water, illuminance, pH);
 
   // 업데이트 데이터
   const updateData = {
@@ -60,7 +60,7 @@ const Controls = () => {
     queryKey: ['rulesData'],
     queryFn: () => getRules(),
   });
-  console.log(data);
+  // console.log(data);
   // 규칙 생성 mutation
   const createMutation = useMutation({
     mutationFn: (newData: RuleData) => createRules({ ...newData }),
@@ -140,7 +140,7 @@ const Controls = () => {
             <SettingButton
               id={2}
               onSave={() => {
-                if (dummyData.length !== 0) console.log('update');
+                if (illuminance.length !== 0) console.log('update');
                 else console.log('create');
               }}
               onDelete={(id) => console.log('delete id', id)}
@@ -154,13 +154,14 @@ const Controls = () => {
             <div className="text-4xl">pH 제어</div>
             <SettingButton
               id={3}
-              onSave={() => {
-                if (dummyData.length !== 0) console.log('update');
-                else console.log('create');
+              onSave={(saveData: number, id: number) => {
+                if (pH.length !== 0) console.log('update', saveData, id);
+                else console.log('create', saveData);
               }}
               onDelete={(id) => console.log('delete id', id)}
               type="PH"
-              data={rulesData.filter((item) => item.ruleName === 'PH')}
+              // create, update 테스트를 위해 따로 필터링
+              data={rulesData.filter((item) => item.ruleName === 'pH')}
             />
           </div>
         </Card>
