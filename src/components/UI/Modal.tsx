@@ -13,7 +13,7 @@ const Modal = ({
   onSave,
 }: ModalType) => {
   const [value, setValue] = useState<number>(data?.[0]?.threshold ?? 0);
-  console.log(id);
+  console.log(id, value);
   const customStyle: Styles = {
     overlay: {
       position: 'fixed',
@@ -87,7 +87,7 @@ const Modal = ({
             취소
           </button>
           <button
-            onClick={() => onSave(`hi`, id)}
+            onClick={() => onSave(value, id)}
             className="w-24 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
           >
             저장
