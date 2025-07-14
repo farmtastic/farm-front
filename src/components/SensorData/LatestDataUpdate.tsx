@@ -5,25 +5,25 @@ import { useQuery } from '@tanstack/react-query';
 import { getLatestSensorData } from '@/apis/SensorAxios';
 import { formatTimestamp } from '@/utils/formatTimestamp';
 
-const dataDummyData = {
-  historyValues: null,
-  latestValues: {
-    ILLUMINANCE: {
-      timestamp: '2025-06-26T12:55:36.071133',
-      value: 12000,
-    },
-    PH: {
-      timestamp: '2025-06-26T12:55:36.057906',
-      value: 6.5,
-    },
-    WATER_LEVEL: {
-      timestamp: '2025-06-26T12:55:36.064386',
-      value: 85.2,
-    },
-  },
-  zoneId: 1,
-  zoneName: '스마트팜 A-1',
-};
+// const DummyData = {
+//   historyValues: null,
+//   latestValues: {
+//     ILLUMINANCE: {
+//       timestamp: '2025-06-26T12:55:36.071133',
+//       value: 12000,
+//     },
+//     PH: {
+//       timestamp: '2025-06-26T12:55:36.057906',
+//       value: 6.5,
+//     },
+//     WATER_LEVEL: {
+//       timestamp: '2025-06-26T12:55:36.064386',
+//       value: 85.2,
+//     },
+//   },
+//   zoneId: 1,
+//   zoneName: '스마트팜 A-1',
+// };
 
 const LatestDataUpdate = () => {
   const {
@@ -41,7 +41,7 @@ const LatestDataUpdate = () => {
       {!isLoading && (
         <span>
           최신 업데이트:{' '}
-          {formatTimestamp(dataDummyData.latestValues.WATER_LEVEL.timestamp)}
+          {formatTimestamp(sensorData.latestValues.WATER_LEVEL?.timestamp)}
         </span>
       )}
       <button className="w-5 bg-transparent mx-2">
