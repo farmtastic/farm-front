@@ -20,7 +20,6 @@ const Header = () => {
       <LatestDataUpdate />
       <FaRegBell onClick={onShowDrawer} size={40} className="cursor-pointer" />
       <Drawer showDrawer={showDrawer} onClose={onCloseDrawer} />
-      {/* {showDrawer && <Drawer showDrawer={showDrawer} onClose={onCloseDrawer} />} */}
     </header>
   );
 };
