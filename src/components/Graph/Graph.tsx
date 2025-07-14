@@ -1,7 +1,7 @@
 import ArticleTitle from '../UI/ArticleTitle';
 import CustomGraph from './CustomGraph';
-// import { useQuery } from '@tanstack/react-query';
-// import { getDataHistory } from '@/apis/SensorAxios';
+import { useQuery } from '@tanstack/react-query';
+import { getDataHistory } from '@/apis/SensorAxios';
 
 const DummyData = {
   historyValues: {
@@ -28,12 +28,12 @@ const DummyData = {
 
 const Graph = () => {
   // 과거 이력 조회 쿼리
-  // const { data: HistoryData } = useQuery({
-  //   queryKey: ['dataHistory'],
-  //   queryFn: () => getDataHistory({ zoneId: 1 }),
-  // });
+  const { data: HistoryData } = useQuery({
+    queryKey: ['dataHistory'],
+    queryFn: () => getDataHistory({ zoneId: 1 }),
+  });
 
-  // console.log(HistoryData);
+  console.log(HistoryData);
 
   // threshold와 type 속성 필요. type은 프론트에서 직접 추가하면 될 것 같고 threshold을 같이 보내줄 수 있냐고 여쭤봐야됨.
   const waterHistory = DummyData.historyValues.WATER_LEVEL.map((d) => ({
