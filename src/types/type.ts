@@ -48,20 +48,21 @@ type ControlsDataType = {
 };
 
 export interface ModalType {
-  type: 'water' | 'illuminance' | 'PH';
+  type: 'water' | 'illuminance' | 'PH' | string;
   isOpen: boolean;
   closeModal: () => void;
   data: ControlsDataType[];
-  onSave: (saveData: number, id: number) => void; // 임시로 string 타입으로 적어놓았음.
+  onSave: (saveData: number, id: number, type: string) => void; // 임시로 string 타입으로 적어놓았음.
   onDelete: (id: number) => void;
   id: number;
 }
 
 export interface STButtonType {
-  type: 'water' | 'illuminance' | 'PH';
+  btnType: 'controls' | 'history';
+  type: 'water' | 'illuminance' | 'PH' | string;
   data: ControlsDataType[];
-  onSave: (saveData: number, id: number) => void; // 임시로 string 타입으로 적어놓았음.
-  onDelete: (id: number) => void;
+  onSave?: (data: number, id: number, type: string) => void; // 임시로 string 타입으로 적어놓았음.
+  onDelete?: (id: number) => void;
   id: number;
 }
 
