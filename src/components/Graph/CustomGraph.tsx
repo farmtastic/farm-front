@@ -14,6 +14,10 @@ import type { CustomGraphProps } from '@/types/type';
 
 const CustomGraph = ({ data, type }: CustomGraphProps) => {
   // 모달창과 단위 컴포넌트 z-index 수정해야함
+
+  const unit =
+    type === 'WATER_LEVEL' ? 'm' : type === 'ILLUMINANCE' ? 'lux' : '';
+
   return (
     <div>
       <div className="flex">
@@ -28,7 +32,7 @@ const CustomGraph = ({ data, type }: CustomGraphProps) => {
       </div>
       <div className="relative">
         <div className="absolute right-16 top-0 flex justify-end mt-2 text-gray-400 text-xs z-10">
-          (단위: m)
+          {unit !== '' && `(단위: ${unit})`}
         </div>
         <ResponsiveContainer width="100%" height={370}>
           <LineChart
