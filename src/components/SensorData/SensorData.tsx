@@ -29,6 +29,12 @@ import { getLatestSensorData, getDataHistory } from '@/apis/SensorAxios';
 const SensorData = () => {
   // 최신 상태 조회 쿼리
   // isLoading => 로딩 스피너, isFetching => 새로고침
+
+  // TODO
+  // n분 주기로 latestSensorData를 새로 불러오는 코드 작성해야함(이력조회도 일단 동일한 방식으로 코드 작성)
+  // 그래프 단위 표시 z-index 수정
+  // 그래프 그릴때 n개까지만 그려지도록 자르기. (이력 조회는 그냥 전부)
+
   const {
     data: sensorData,
     isLoading,
@@ -44,22 +50,18 @@ const SensorData = () => {
     queryFn: () => getDataHistory({ zoneId: 1 }),
   });
 
-  if (isLoading) {
+  if (isLoading || !HistoryData || !HistoryData.historyValues) {
     return <LoadingSpinner />;
   }
 
   // 가장 최근의 history 데이터가 배열 맨뒤에 추가된다고 가정함
-  const waterHistory =
-    HistoryData.historyValues.WATER_LEVEL[
-      HistoryData.historyValues.WATER_LEVEL.length - 1
-    ].value;
-  const sunHistory = HistoryData.historyValues.LIGHT[0].value; // UI 테스트를 위해 배열 인덱스 임의 지정
-  const pHHistory = HistoryData.historyValues.PH[0].value; // UI 테스트를 위해 배열 인덱스 임의 지정
+  const waterArr = HistoryData?.historyValues?.WATER_LEVEL ?? [];
+  const sunArr = HistoryData?.historyValues?.LIGHT ?? [];
+  const phArr = HistoryData?.historyValues?.PH ?? [];
 
-  // console.log(sensorData, 'sensor', isLoading, HistoryData);
-
-  // 실시간 수치들을 넘겨주면서 과거 이력 조회api의 가장 최신 데이터도 같이 넘겨줌
-  // 가장 최신 데이터를 이용해서 이전 수치에 비해 얼마나 증/감/유지 되었는지를 표시.
+  const waterHistory = waterArr[waterArr.length - 1]?.value ?? null;
+  const sunHistory = sunArr[0]?.value ?? null; // 테스트를 위힌 임의 값 지정
+  const pHHistory = phArr[0]?.value ?? null; // 테스트를 위힌 임의 값 지정
 
   return (
     <article className="mb-card py-contentsCard bg-ContentsColor rounded-contentsCard">
@@ -68,11 +70,10 @@ const SensorData = () => {
       </div>
       <div className="flex justify-between m-contentsCard">
         <Card type="sensors">
-          {isLoading && <LoadingSpinner />}
-          {!isLoading && (
+          {(isLoading || isFetching) && <LoadingSpinner />}
+          {(!isLoading || !isFetching) && (
             <ThresholdCard
               type="water"
-              // sensorData.latestValues.WATER_LEVEL.value
               data={sensorData.latestValues.WATER_LEVEL.value}
               history={waterHistory}
             />
@@ -83,18 +84,16 @@ const SensorData = () => {
           {(!isLoading || !isFetching) && (
             <ThresholdCard
               type="illuminance"
-              // sensorData.latestValues.ILLUMINANCE.value
               data={sensorData.latestValues.LIGHT.value}
               history={sunHistory}
             />
           )}
         </Card>
         <Card type="sensors">
-          {isLoading && <LoadingSpinner />}
-          {!isLoading && (
+          {(isLoading || isFetching) && <LoadingSpinner />}
+          {(!isLoading || !isFetching) && (
             <ThresholdCard
               type="PH"
-              // sensorData.latestValues.PH.value
               data={sensorData.latestValues.PH.value}
               history={pHHistory}
             />
