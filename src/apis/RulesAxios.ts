@@ -51,7 +51,7 @@ export const updateRules = async ({ ruleId, newData }: RulesProps) => {
 
 export const deleteRules = async ({ ruleId }: RulesProps) => {
   try {
-    const { data } = await AxiosInstance.delete(`/rules/${ruleId}`);
+    const { data } = await AxiosInstance.delete(`/rules/delete/${ruleId}`);
     return data;
   } catch (error) {
     throw new Error(`${error}`);
