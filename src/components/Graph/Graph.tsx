@@ -38,17 +38,17 @@ const Graph = () => {
   // threshold와 type 속성 필요. type은 프론트에서 직접 추가하면 될 것 같고 threshold을 같이 보내줄 수 있냐고 여쭤봐야됨.
   const waterHistory = DummyData.historyValues.WATER_LEVEL.map((d) => ({
     ...d,
-    type: 'WATER_LEVEL',
+    type: 'WATER_LEVEL' as const,
     threshold: 7,
   }));
   const illuminanceHistory = DummyData.historyValues.ILLUMINANCE.map((d) => ({
     ...d,
-    type: 'WATER_LEVEL',
+    type: 'ILLUMINANCE' as const,
     threshold: 7000,
   }));
   const pHHistory = DummyData.historyValues.PH.map((d) => ({
     ...d,
-    type: 'WATER_LEVEL',
+    type: 'PH' as const,
     threshold: 5.5,
   }));
 
