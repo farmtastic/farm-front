@@ -11,6 +11,7 @@ import CustomTooltip from './CustomTooltip';
 import dayjs from 'dayjs';
 import LineDescript from './LineDescript';
 import type { CustomGraphProps } from '@/types/type';
+import Button from '../Controls/Button';
 
 const CustomGraph = ({ data, type }: CustomGraphProps) => {
   // 모달창과 단위 컴포넌트 z-index 수정해야함
@@ -20,7 +21,7 @@ const CustomGraph = ({ data, type }: CustomGraphProps) => {
 
   return (
     <div>
-      <div className="flex">
+      <div className="flex items-center gap-3">
         <div className="text-3xl mb-graphB mt-graphT">
           {type === 'WATER_LEVEL'
             ? '수위'
@@ -28,7 +29,7 @@ const CustomGraph = ({ data, type }: CustomGraphProps) => {
             ? '조도'
             : 'pH'}
         </div>
-        <button className="bg-ContentsColor">기록 조회</button>
+        <Button btnType="history" id={1} type="water" data={data} />
       </div>
       <div className="relative">
         <div className="absolute right-16 top-0 flex justify-end mt-2 text-gray-400 text-xs z-10">
