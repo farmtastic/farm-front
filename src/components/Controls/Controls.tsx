@@ -13,35 +13,35 @@ import {
 
 const Controls = () => {
   // 테스트 데이터
-  const rulesData = [
-    {
-      ruleName: 'water',
-      sensorId: 1,
-      conditionOp: '테스트op',
-      threshold: 100,
-      actuatorId: 7,
-      command: '테스트cd',
-      active: true,
-    },
-    {
-      ruleName: 'illuminance',
-      sensorId: 2,
-      conditionOp: '조도 테스트',
-      threshold: 600,
-      actuatorId: 8,
-      command: '조도 테스트',
-      active: true,
-    },
-    {
-      ruleName: 'pH',
-      sensorId: 3,
-      conditionOp: 'pH 테스트',
-      threshold: 5.6,
-      actuatorId: 9,
-      command: 'pH 테스트',
-      active: true,
-    },
-  ];
+  // const rulesData = [
+  //   {
+  //     ruleName: 'water',
+  //     sensorId: 1,
+  //     conditionOp: '테스트op',
+  //     threshold: 100,
+  //     actuatorId: 7,
+  //     command: '테스트cd',
+  //     active: true,
+  //   },
+  //   {
+  //     ruleName: 'illuminance',
+  //     sensorId: 2,
+  //     conditionOp: '조도 테스트',
+  //     threshold: 600,
+  //     actuatorId: 8,
+  //     command: '조도 테스트',
+  //     active: true,
+  //   },
+  //   {
+  //     ruleName: 'pH',
+  //     sensorId: 3,
+  //     conditionOp: 'pH 테스트',
+  //     threshold: 5.6,
+  //     actuatorId: 9,
+  //     command: 'pH 테스트',
+  //     active: true,
+  //   },
+  // ];
 
   //규칙 조회 쿼리
   const { data, refetch } = useQuery({
@@ -49,27 +49,20 @@ const Controls = () => {
     queryFn: () => getRules(),
   });
 
-  // console.log(data);
-  const water =
-    data === undefined
-      ? ''
-      : data.filter((item: RuleData) => item.ruleName === 'water');
-  const illuminance =
-    data === undefined
-      ? ''
-      : data.filter((item: RuleData) => item.ruleName === 'illuminance');
-  const pH =
-    data === undefined
-      ? ''
-      : data.filter((item: RuleData) => item.ruleName === 'pH');
-  // console.log('임계값 조회', water, illuminance, pH);
+  console.log('rules data', data);
+  const rules = data ?? [];
+  const getRulesByName = (name: string) =>
+    rules.filter((item: RuleData) => item.ruleName === name);
+  const water = getRulesByName('water');
+  const illuminance = getRulesByName('illuminance');
+  const pH = getRulesByName('PH');
 
   // 규칙 생성 mutation
   const createMutation = useMutation({
     mutationFn: (newData: RuleData) => createRules({ ...newData }),
     onSuccess: (data) => {
       console.log('생성 성공:', data);
-      alert(data.message);
+      alert('규칙 생성 성공');
       refetch();
     },
     onError: (error) => {
@@ -84,11 +77,7 @@ const Controls = () => {
       updateRules({ ruleId, newData }),
     onSuccess: (data) => {
       console.log('수정 성공:', data);
-      alert(
-        data.message === undefined
-          ? '수정이 완료되었습니다.'
-          : '수정에 실패하였습니다.'
-      );
+      alert('규칙 수정 완료');
       refetch();
     },
     onError: (error) => {
@@ -102,7 +91,8 @@ const Controls = () => {
     mutationFn: ({ ruleId }: RulesProps) => deleteRules({ ruleId }),
     onSuccess: (data) => {
       console.log('삭제 성공:', data);
-      alert(data.message);
+      alert('규칙 삭제 성공');
+      refetch();
     },
     onError: (error) => {
       console.error('삭제 실패:', error);
@@ -114,17 +104,16 @@ const Controls = () => {
     const unit =
       type === 'water' ? water : type === 'illuminance' ? illuminance : pH;
     if (unit.length !== 0) {
-      console.log('수정', type, unit.length);
       const newData = {
-        ...water[0],
+        ...unit[0],
         threshold: data,
       };
       updateMutation.mutate({ ruleId: id, newData });
     } else {
-      console.log(data, id, type, '생성');
+      const unitId = type === 'water' ? 1 : type === 'illuminance' ? 2 : 3;
       const newCreateData = {
         ruleName: type,
-        sensorId: id,
+        sensorId: unitId,
         conditionOp: '테스트op',
         threshold: data,
         actuatorId: type === 'water' ? 7 : type === 'illuminance' ? 8 : 9,
@@ -136,32 +125,42 @@ const Controls = () => {
   };
 
   const onDelete = (id: number) => deleteMutation.mutate({ ruleId: id });
-
   const controlConfigs = [
     {
       label: '수위 제어',
       type: 'water',
-      id: 1,
+      id: water[0]?.ruleId,
       data: water,
-      onSave: (data: number, id: number, type: string) =>
-        onSave(data, id, type),
-      onDelete: (id: number) => onDelete(id),
+      onSave: (data: number, id: number, type: string) => {
+        onSave(data, id, type);
+      },
+      onDelete: (id: number) => {
+        onDelete(id);
+      },
     },
     {
       label: '조도 제어',
       type: 'illuminance',
-      id: 2,
+      id: illuminance[0]?.ruleId,
       data: illuminance,
-      onSave: (data: number, id: number, type: string) =>
-        onSave(data, id, type),
+      onSave: (data: number, id: number, type: string) => {
+        onSave(data, id, type);
+      },
+      onDelete: (id: number) => {
+        onDelete(id);
+      },
     },
     {
       label: 'pH 제어',
       type: 'PH',
-      id: 3,
-      data: rulesData.filter((item) => item.ruleName === 'pH'),
-      onSave: (data: number, id: number, type: string) =>
-        onSave(data, id, type),
+      id: pH[0]?.ruleId,
+      data: pH,
+      onSave: (data: number, id: number, type: string) => {
+        onSave(data, id, type);
+      },
+      onDelete: (id: number) => {
+        onDelete(id);
+      },
     },
   ];
 
@@ -170,7 +169,7 @@ const Controls = () => {
       <ArticleTitle>제어</ArticleTitle>
       <div className="flex flex-col">
         {controlConfigs.map((cfg) => (
-          <Card type="controls" key={cfg.id}>
+          <Card type="controls" key={cfg.type}>
             <div className="m-16 flex justify-between flex-1">
               <div className="text-4xl">{cfg.label}</div>
               <Button
