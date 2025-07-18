@@ -13,6 +13,8 @@ export default {
       padding: {
         contentsCard: '1px',
         '45px': '45px',
+        latestT: '2.5rem',
+        latestL: '15rem',
       },
       borderColor: {
         card: '#A1A1A1',

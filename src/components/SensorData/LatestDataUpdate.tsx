@@ -36,7 +36,7 @@ const LatestDataUpdate = () => {
   });
 
   return (
-    <div className="text-3xl flex items-center">
+    <div className="text-3xl flex items-center pt-latestT pl-latestL">
       {isLoading && <LoadingSpinner />}
       {!isLoading && (
         <span>
