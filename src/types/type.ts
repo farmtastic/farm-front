@@ -11,7 +11,7 @@ export interface SensorDataAPIProps {
 
 export interface RuleData {
   ruleName: string;
-  sensorId: number;
+  sensorId?: number;
   conditionOp: string;
   threshold: number;
   actuatorId: number;
@@ -37,7 +37,7 @@ export interface SensorDataProps {
   history: number;
 }
 
-type ControlsDataType = {
+export type ControlsDataType = {
   ruleName: string;
   sensorId: number;
   conditionOp: string;
@@ -47,12 +47,25 @@ type ControlsDataType = {
   active: boolean;
 };
 
+export type HistoryType = {
+  timestamp: string;
+  value: number;
+  type: 'WATER_LEVEL' | 'ILLUMINANCE' | 'PH';
+  threshold: number;
+};
+
+export interface HistoryModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  data: HistoryType[];
+}
+
 export interface ModalType {
   type: 'water' | 'illuminance' | 'PH' | string;
   isOpen: boolean;
   closeModal: () => void;
   data: ControlsDataType[];
-  onSave: (saveData: number, id: number, type: string) => void; // 임시로 string 타입으로 적어놓았음.
+  onSave: (saveData: number, id: number, type: string) => void;
   onDelete: (id: number) => void;
   id: number;
 }
@@ -60,8 +73,8 @@ export interface ModalType {
 export interface STButtonType {
   btnType: 'controls' | 'history';
   type: 'water' | 'illuminance' | 'PH' | string;
-  data: ControlsDataType[];
-  onSave?: (data: number, id: number, type: string) => void; // 임시로 string 타입으로 적어놓았음.
+  data: ControlsDataType[] | HistoryType[];
+  onSave?: (data: number, id: number, type: string) => void;
   onDelete?: (id: number) => void;
   id: number;
 }
@@ -77,15 +90,8 @@ export interface DrawerProps {
   onClose: () => void;
 }
 
-export interface GraphDataType {
-  timestamp: string;
-  value: number;
-  threshold: number;
-  type: string;
-}
-
 export interface CustomGraphProps {
-  data: GraphDataType[];
+  data: HistoryType[];
   type: 'WATER_LEVEL' | 'ILLUMINANCE' | 'PH';
 }
 
