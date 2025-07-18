@@ -24,6 +24,7 @@ export default {
       colors: {
         BackgroundColor: '#11111C',
         ContentsColor: '#1C1C2A',
+        LightContentsColor: '#191A27',
         ModalSmText: '#7f7f7f',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
