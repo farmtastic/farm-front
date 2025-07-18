@@ -13,7 +13,7 @@ const Modal = ({
   onSave,
 }: ModalType) => {
   const [value, setValue] = useState<number>(data?.[0]?.threshold ?? 0);
-  console.log(id, value, type);
+
   const customStyle: Styles = {
     overlay: {
       position: 'fixed',
@@ -98,7 +98,10 @@ const Modal = ({
           <button
             type="button"
             className="w-24 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-            onClick={() => onDelete(id)}
+            onClick={() => {
+              onDelete(id);
+              closeModal();
+            }}
           >
             제거
           </button>
