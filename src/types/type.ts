@@ -79,7 +79,7 @@ export interface STButtonType {
   id: number;
 }
 
-export interface ThresholdType {
+export interface SensorDataType {
   type: 'water' | 'illuminance' | 'PH';
   data: number;
   history: number;
