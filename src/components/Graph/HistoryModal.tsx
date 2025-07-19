@@ -13,6 +13,7 @@ const HistoryModal = ({ isOpen, closeModal, data }: HistoryModalProps) => {
       right: 0,
       bottom: 0,
       backgroundColor: 'rgba(17, 17, 28, 0.75)',
+      zIndex: 50,
     },
     content: {
       top: '50%',
@@ -50,7 +51,7 @@ const HistoryModal = ({ isOpen, closeModal, data }: HistoryModalProps) => {
       onRequestClose={closeModal}
       style={customStyle}
     >
-      <div className="relative mt-0 overflow-y-auto max-h-[500px]">
+      <div className="relative mt-0 overflow-y-auto max-h-[500px] z-20">
         <div className="flex justify-center items-center px-6 py-6 border-b border-gray-500">
           <h2 className="text-3xl font-bold text-white">
             <span>
