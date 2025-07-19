@@ -1,5 +1,5 @@
 import type { HistoryType, STButtonType, ControlsDataType } from '@/types/type';
-import Modal from '../UI/Modal';
+import ThresholdModal from '@/components/Controls/ThresholdModal';
 import HistoryModal from '../Graph/HistoryModal';
 import { useState } from 'react';
 
@@ -40,7 +40,7 @@ const Button = ({
         />
       )}
       {showModal && btnType === 'controls' && (
-        <Modal
+        <ThresholdModal
           id={id}
           onSave={onSave}
           onDelete={onDelete}
