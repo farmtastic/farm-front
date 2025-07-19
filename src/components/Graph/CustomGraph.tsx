@@ -11,7 +11,7 @@ import CustomTooltip from './CustomTooltip';
 import dayjs from 'dayjs';
 import LineDescript from './LineDescript';
 import type { CustomGraphProps } from '@/types/type';
-import Button from '../Controls/Button';
+import Button from '@/components/UI/Button';
 
 const CustomGraph = ({ data, type }: CustomGraphProps) => {
   // 모달창과 단위 컴포넌트 z-index 수정해야함

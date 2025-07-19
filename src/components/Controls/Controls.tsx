@@ -1,6 +1,6 @@
 import ArticleTitle from '../UI/ArticleTitle';
 import Card from '../UI/Card';
-import Button from './Button';
+import Button from '@/components/UI/Button';
 import type { RuleData, RulesProps } from '@/types/type';
 
 import { useQuery, useMutation } from '@tanstack/react-query';
@@ -12,37 +12,6 @@ import {
 } from '@/apis/RulesAxios';
 
 const Controls = () => {
-  // 테스트 데이터
-  // const rulesData = [
-  //   {
-  //     ruleName: 'water',
-  //     sensorId: 1,
-  //     conditionOp: '테스트op',
-  //     threshold: 100,
-  //     actuatorId: 7,
-  //     command: '테스트cd',
-  //     active: true,
-  //   },
-  //   {
-  //     ruleName: 'illuminance',
-  //     sensorId: 2,
-  //     conditionOp: '조도 테스트',
-  //     threshold: 600,
-  //     actuatorId: 8,
-  //     command: '조도 테스트',
-  //     active: true,
-  //   },
-  //   {
-  //     ruleName: 'pH',
-  //     sensorId: 3,
-  //     conditionOp: 'pH 테스트',
-  //     threshold: 5.6,
-  //     actuatorId: 9,
-  //     command: 'pH 테스트',
-  //     active: true,
-  //   },
-  // ];
-
   //규칙 조회 쿼리
   const { data, refetch } = useQuery({
     queryKey: ['rulesData'],

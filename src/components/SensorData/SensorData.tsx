@@ -1,5 +1,5 @@
 import ArticleTitle from '../UI/ArticleTitle';
-import ThresholdCard from '../UI/ThresholdCard';
+import SensorDataCard from './SensorDataCard';
 import Card from '../UI/Card';
 import LoadingSpinner from '../UI/LoadingSpinner';
 
@@ -31,9 +31,15 @@ const SensorData = () => {
   // isLoading => 로딩 스피너, isFetching => 새로고침
 
   // TODO
-  // n분 주기로 latestSensorData를 새로 불러오는 코드 작성해야함(이력조회도 일단 동일한 방식으로 코드 작성)
-  // 그래프 단위 표시 z-index 수정
   // 그래프 그릴때 n개까지만 그려지도록 자르기. (이력 조회는 그냥 전부)
+
+  // 회의때 물어볼것
+  // 수위는 임계값을 설정할 필요가 없는가?
+  // 규칙 조회 api에서 받아오는 수위 경고, 조명 자동 조절은 뭔가. 프론트에서 신경써야할 부분인가?
+  // api 호출할때 기존 방식과 달라진 점이 있는지? (필요한 데이터가 바꼈다던지 등등...)
+  // 그래프 이력 데이터는 3시간 이내의 데이터만 저장되는것인가?
+  // 알림 더미데이터 sql문 요청
+  // 그래프 이력 조회 데이터 기록 주기...?
 
   const {
     data: sensorData,
@@ -42,6 +48,7 @@ const SensorData = () => {
   } = useQuery({
     queryKey: ['latestSensorData'],
     queryFn: () => getLatestSensorData({ zoneId: 1 }),
+    refetchInterval: 5 * 60 * 1000, // 5분 주기 (ms)
   });
 
   // 과거 이력 조회 쿼리
@@ -72,7 +79,7 @@ const SensorData = () => {
         <Card type="sensors">
           {(isLoading || isFetching) && <LoadingSpinner />}
           {(!isLoading || !isFetching) && (
-            <ThresholdCard
+            <SensorDataCard
               type="water"
               data={sensorData.latestValues.WATER_LEVEL.value}
               history={waterHistory}
@@ -82,7 +89,7 @@ const SensorData = () => {
         <Card type="sensors">
           {(isLoading || isFetching) && <LoadingSpinner />}
           {(!isLoading || !isFetching) && (
-            <ThresholdCard
+            <SensorDataCard
               type="illuminance"
               data={sensorData.latestValues.LIGHT.value}
               history={sunHistory}
@@ -92,7 +99,7 @@ const SensorData = () => {
         <Card type="sensors">
           {(isLoading || isFetching) && <LoadingSpinner />}
           {(!isLoading || !isFetching) && (
-            <ThresholdCard
+            <SensorDataCard
               type="PH"
               data={sensorData.latestValues.PH.value}
               history={pHHistory}
