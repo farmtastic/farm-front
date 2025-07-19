@@ -3,7 +3,7 @@ import type { Styles } from 'react-modal';
 import type { ModalType } from '@/types/type';
 import { useState } from 'react';
 
-const Modal = ({
+const ThresholdModal = ({
   id,
   type,
   isOpen,
@@ -111,4 +111,4 @@ const Modal = ({
   );
 };
 
-export default Modal;
+export default ThresholdModal;
