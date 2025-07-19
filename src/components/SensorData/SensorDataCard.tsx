@@ -1,10 +1,10 @@
 import PHIcon from '@/components/Icon/pH.svg?react';
 import Sun from '@/components/Icon/sun.svg?react';
 import WaterIcon from '@/components/Icon/water.svg?react';
-import type { ThresholdType } from '@/types/type';
-import Threshold from './Threshold';
+import type { SensorDataType } from '@/types/type';
+import DiffStatus from './DiffStatus';
 
-const ThresholdCard = ({ type, data, history }: ThresholdType) => {
+const SensorDataCard = ({ type, data, history }: SensorDataType) => {
   return (
     <div className="flex flex-col items-center gap-2">
       {type === 'water' ? (
@@ -14,9 +14,9 @@ const ThresholdCard = ({ type, data, history }: ThresholdType) => {
       ) : (
         <PHIcon className="w-28 h-28" />
       )}
-      <Threshold type={type} data={data} history={history} />
+      <DiffStatus type={type} data={data} history={history} />
     </div>
   );
 };
 
-export default ThresholdCard;
+export default SensorDataCard;

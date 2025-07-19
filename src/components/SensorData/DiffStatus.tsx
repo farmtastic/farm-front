@@ -1,8 +1,8 @@
 import { IoTriangle } from 'react-icons/io5';
 import Rectangular from '../UI/Rectangular';
-import type { ThresholdType } from '@/types/type';
+import type { SensorDataType } from '@/types/type';
 
-const Threshold = ({ type, data, history }: ThresholdType) => {
+const DiffStatus = ({ type, data, history }: SensorDataType) => {
   const diff = data - history;
   const diffFixed = diff.toFixed(2);
 
@@ -42,4 +42,4 @@ const Threshold = ({ type, data, history }: ThresholdType) => {
   );
 };
 
-export default Threshold;
+export default DiffStatus;
