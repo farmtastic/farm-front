@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getDataHistory } from '@/apis/SensorAxios';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import type { HistoryDataType } from '@/types/type';
+import WarningIcon from '@/components/Icon/warning_orange.svg?react';
 
 const DummyData = {
   historyValues: {
@@ -61,7 +62,10 @@ const Graph = () => {
 
   return (
     <article className="p-45px rounded-contentsCard bg-ContentsColor">
-      <ArticleTitle>수치 그래프</ArticleTitle>
+      <div className="flex items-center gap-3">
+        <ArticleTitle>수치 그래프</ArticleTitle>
+        <WarningIcon />
+      </div>
       <CustomGraph
         type="WATER_LEVEL"
         data={waterHistory.slice(0, 5)} // 5개까지만 그래프에 보여주도록 임시 설정
