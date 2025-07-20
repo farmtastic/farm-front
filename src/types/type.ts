@@ -92,6 +92,7 @@ export interface DrawerProps {
 
 export interface CustomGraphProps {
   data: HistoryType[];
+  historyData: HistoryType[];
   type: 'WATER_LEVEL' | 'ILLUMINANCE' | 'PH';
 }
 
@@ -106,3 +107,9 @@ export interface CustomTooltipProps extends TooltipProps<number, string> {
     };
   }>;
 }
+
+export type HistoryDataType = {
+  timestamp: string;
+  value: number;
+  threshold: number;
+};
