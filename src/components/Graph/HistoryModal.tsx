@@ -50,7 +50,7 @@ const HistoryModal = ({ isOpen, closeModal, data }: HistoryModalProps) => {
       onRequestClose={closeModal}
       style={customStyle}
     >
-      <div className="relative mt-0 overflow-y-auto max-h-[500px] z-20">
+      <div className="hide-scrollbar relative mt-0 overflow-y-auto max-h-[500px] z-20 scrollbar-thumb-slate-600 scrollbar-track-slate-800">
         <div className="flex justify-center items-center px-6 py-6 border-b border-gray-500">
           <h2 className="text-3xl font-bold text-white">
             <span>
