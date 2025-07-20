@@ -128,3 +128,28 @@ h1 {
 .recharts-legend-wrapper:focus {
   outline: none !important;
 }
+
+/* 스크롤바 디자인 수정 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af;
+}
+::-webkit-scrollbar-track {
+  background-color: #1f2937;
+}
+
+/* 스크롤 기능은 유지하지만 스크롤바는 숨김 */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
