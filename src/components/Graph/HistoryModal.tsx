@@ -4,7 +4,6 @@ import type { Styles } from 'react-modal';
 import dayjs from 'dayjs';
 
 const HistoryModal = ({ isOpen, closeModal, data }: HistoryModalProps) => {
-  console.log(data);
   const customStyle: Styles = {
     overlay: {
       position: 'fixed',
@@ -109,31 +108,3 @@ const HistoryModal = ({ isOpen, closeModal, data }: HistoryModalProps) => {
 };
 
 export default HistoryModal;
-
-/* <div className="mt-4 overflow-y-auto max-h-[500px]">
-          <table className="w-full table-fixed border-collapse text-sm">
-            <thead>
-              <tr className="bg-gray-800">
-                <th className="p-3 text-left">시간</th>
-                <th className="p-3 text-right">값</th>
-                <th className="p-3 text-right">임계값</th>
-              </tr>
-            </thead>
-            <tbody>
-              {history.map((rec, idx) => (
-                <tr
-                  key={idx}
-                  className={idx % 2 === 0 ? 'bg-gray-850' : 'bg-gray-800'}
-                >
-                  <td className="p-3">
-                    {dayjs(rec.timestamp).format('MM.DD HH:mm')}
-                  </td>
-                  <td className="p-3 text-right">{rec.value}</td>
-                  <td className="p-3 text-right text-red-400">
-                    {rec.threshold ?? '-'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div> */
