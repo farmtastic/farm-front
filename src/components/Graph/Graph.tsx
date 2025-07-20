@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getDataHistory } from '@/apis/SensorAxios';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import type { HistoryDataType } from '@/types/type';
-import WarningIcon from '@/components/Icon/warning_orange.svg?react';
+import GraphInfoTooltip from './GraphInfoTooltip';
 
 const DummyData = {
   historyValues: {
@@ -64,7 +64,7 @@ const Graph = () => {
     <article className="p-45px rounded-contentsCard bg-ContentsColor">
       <div className="flex items-center gap-3">
         <ArticleTitle>수치 그래프</ArticleTitle>
-        <WarningIcon />
+        <GraphInfoTooltip text="최근 n시간의 데이터만 그래프로 표기됩니다." />
       </div>
       <CustomGraph
         type="WATER_LEVEL"
