@@ -10,6 +10,9 @@ const MainPages = () => {
     queryKey: ['notification'],
     queryFn: () => getNotifications(),
   });
+
+  console.log(NotiData);
+
   return (
     <Background>
       <Header />
