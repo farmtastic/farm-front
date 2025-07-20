@@ -36,7 +36,7 @@ const DiffStatus = ({ type, data, history }: SensorDataType) => {
         <span className={`text-2xl font-medium px-1 ${diffClass}`}>
           {diffFixed}
         </span>
-        <div className="text-sm">({history})</div>
+        <div className="text-sm">({history !== null ? history : 0})</div>
       </div>
     </>
   );
