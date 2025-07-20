@@ -83,10 +83,10 @@ const Controls = () => {
       const newCreateData = {
         ruleName: type,
         sensorId: unitId,
-        conditionOp: '테스트op',
+        conditionOp: '테스트op', // 예: ">", "<", "=="
         threshold: data,
-        actuatorId: type === 'water' ? 7 : type === 'illuminance' ? 8 : 9,
-        command: '테스트cd',
+        actuatorId: type === 'illuminance' ? 5 : 4,
+        command: '테스트cd', // PH ON, PH OFF(자동 제어)
         active: true,
       };
       createMutation.mutate(newCreateData);
