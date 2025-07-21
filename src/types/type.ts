@@ -83,11 +83,20 @@ export interface SensorDataType {
   type: 'water' | 'illuminance' | 'PH';
   data: number;
   history: number;
+  isWaterLow?: boolean;
+  isWaterHigher?: boolean;
+}
+
+export interface NotiDataType {
+  createdAt: string;
+  message: string;
+  read: boolean;
 }
 
 export interface DrawerProps {
   showDrawer: boolean;
   onClose: () => void;
+  data: NotiDataType[];
 }
 
 export interface CustomGraphProps {
