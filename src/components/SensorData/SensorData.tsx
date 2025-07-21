@@ -11,7 +11,13 @@ const SensorData = () => {
   // isLoading => 로딩 스피너, isFetching => 새로고침
 
   // 센서 데이터 업데이트 주기 10초
-  // 그래프에 쓰이는 데이터는 3시간마다 줌.
+  // 그래프에 쓰이는 데이터는 3시간마다 줌. (초기 데이터 부족 시 3시간이 되지 않으면 현재 센서 데이터 값만 보내짐)
+
+  // TODO
+  // 알림 api에서 수위가 높거나 낮을때 알림이 날라오면 알림 내역에도 띄우고, 센서데이터 수위 카드에도 피그마 디자인보고 사용자가 물을 추가하거나 빼라고 안내문구 띄우기.
+  // 알림 api에서 알림을 넘겨줄때마다 프론트에서 어떻게 실시간으로 받을지 고민해야함.
+  // 새로운 알림이 오면 아이콘에 표시해주기.
+  // 그래프에는 15분까지의 데이터만을 표시 (너무 많으면 그래프가 부드럽게 렌더링 되지 않음)
 
   const {
     data: sensorData,
@@ -20,13 +26,14 @@ const SensorData = () => {
   } = useQuery({
     queryKey: ['latestSensorData'],
     queryFn: () => getLatestSensorData({ zoneId: 1 }),
-    refetchInterval: 5 * 60 * 1000, // 5분 주기 (ms)
+    refetchInterval: 10 * 1000, // 10초 주기 (ms)
   });
 
   // 과거 이력 조회 쿼리
   const { data: HistoryData } = useQuery({
     queryKey: ['dataHistory'],
     queryFn: () => getDataHistory({ zoneId: 1 }),
+    refetchInterval: 10 * 1000, // 10초 주기 (ms)
   });
 
   if (isLoading || !HistoryData || !HistoryData.historyValues) {
@@ -39,15 +46,15 @@ const SensorData = () => {
   const phArr = HistoryData?.historyValues?.PH ?? [];
 
   const waterHistory = waterArr[waterArr.length - 1]?.value ?? null;
-  const sunHistory = sunArr[0]?.value ?? null; // 테스트를 위힌 임의 값 지정
-  const pHHistory = phArr[0]?.value ?? null; // 테스트를 위힌 임의 값 지정
+  const sunHistory = sunArr[sunArr.length - 1]?.value ?? null; // 테스트를 위힌 임의 값 지정
+  const pHHistory = phArr[phArr.length - 1]?.value ?? null; // 테스트를 위힌 임의 값 지정
 
   return (
     <article className="mb-card py-contentsCard bg-ContentsColor rounded-contentsCard">
       <div className="flex justify-between items-center m-contentsCard">
         <ArticleTitle>센서 데이터</ArticleTitle>
       </div>
-      <div className="flex justify-between m-contentsCard">
+      <div className="flex flex-col justify-between m-contentsCard gap-9">
         <Card type="sensors">
           {(isLoading || isFetching) && <LoadingSpinner />}
           {(!isLoading || !isFetching) && (
