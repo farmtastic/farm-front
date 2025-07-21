@@ -52,9 +52,7 @@ const ThresholdModal = ({
       style={customStyle}
     >
       <div>
-        <span>
-          {type === 'water' ? '수위' : type === 'illuminance' ? '조도' : 'pH'}
-        </span>
+        <span>{type === 'LIGHT' ? '조도' : 'pH'}</span>
         <span>임계값 설정</span>
       </div>
       <div className="text-lg">
@@ -63,9 +61,7 @@ const ThresholdModal = ({
       </div>
       <div className="flex flex-col justify-center items-start text-lg text-ModalSmText">
         <div className="mt-3 flex">
-          <span>
-            {type === 'water' ? '수위' : type === 'illuminance' ? '조도' : 'pH'}
-          </span>
+          <span>{type === 'LIGHT' ? '조도' : 'pH'}</span>
           <span>임계값 설정</span>
         </div>
         <div className="flex items-center justify-between mb-6 px-3 py-1 rounded-contentsCard border border-gray-300 rounded-2x w-full max-w-md mr-4 mt-2">
