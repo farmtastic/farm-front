@@ -12,31 +12,37 @@ const DiffStatus = ({ type, data, history }: SensorDataType) => {
 
   return (
     <>
-      <div className="text-2xl">
-        {type === 'water' ? '수위' : type === 'illuminance' ? '조도' : 'pH'}
-      </div>
-      <div>
+      <div className="w-[6vw]">
         <span className="text-3xl">{data}</span>
-        <span className="text-3xl">
+        <span className="text-3xl inline-block">
           {type === 'water' ? 'm' : type === 'illuminance' ? 'lux' : ''}
         </span>
+        <div className="text-xl">
+          {type === 'water' ? '수위' : type === 'illuminance' ? '조도' : 'pH'}
+        </div>
       </div>
-      <div className="flex gap-4 items-center justify-center">
-        {history < data ? (
-          <IoTriangle color="#16BD80" />
-        ) : history > data ? (
-          <IoTriangle
-            size={20}
-            color="#BF1423"
-            className="transform -scale-y-100"
-          />
-        ) : (
-          <Rectangular />
-        )}
-        <span className={`text-2xl font-medium px-1 ${diffClass}`}>
-          {diffFixed}
-        </span>
-        <div className="text-sm">({history !== null ? history : 0})</div>
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-end w-full">
+          <div className="flex items-center">
+            <div>
+              {history < data ? (
+                <IoTriangle color="#16BD80" className="mr-2" />
+              ) : history > data ? (
+                <IoTriangle
+                  size={20}
+                  color="#BF1423"
+                  className="transform -scale-y-100 mr-2"
+                />
+              ) : (
+                <Rectangular />
+              )}
+            </div>
+            <span className={`text-2xl font-medium px-1 ${diffClass}`}>
+              {diffFixed}
+            </span>
+          </div>
+          <div className="text-sm px-1">({history !== null ? history : 0})</div>
+        </div>
       </div>
     </>
   );

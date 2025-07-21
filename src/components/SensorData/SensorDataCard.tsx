@@ -6,13 +6,13 @@ import DiffStatus from './DiffStatus';
 
 const SensorDataCard = ({ type, data, history }: SensorDataType) => {
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex items-center gap-2 justify-between w-full px-24">
       {type === 'water' ? (
-        <WaterIcon className="w-24 h-24 mb-4" />
+        <WaterIcon className="w-28 h-28 mb-4" />
       ) : type === 'illuminance' ? (
-        <Sun className="w-28 h-28" />
+        <Sun className="w-32 h-32" />
       ) : (
-        <PHIcon className="w-28 h-28" />
+        <PHIcon className="w-32 h-32" />
       )}
       <DiffStatus type={type} data={data} history={history} />
     </div>

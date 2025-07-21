@@ -86,7 +86,7 @@ export default {
       height: {
         header: '170px',
         sensor: '420px',
-        210: '280px',
+        210: '200px',
         140: '140px',
         graph: '250px',
         drawerList: '100px',
