@@ -5,8 +5,13 @@ import { getDataHistory } from '@/apis/SensorAxios';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import type { HistoryDataType } from '@/types/type';
 import GraphInfoTooltip from './GraphInfoTooltip';
+import Card from '../UI/Card';
 
 const Graph = () => {
+  const FIFTEEN_MINUTES = 16 * 60 * 1000;
+  // 기준 시각: 지금으로부터 16분 전
+  const cutoff = Date.now() - FIFTEEN_MINUTES;
+
   // 과거 이력 조회 쿼리
   const { data: HistoryData, isLoading } = useQuery({
     queryKey: ['dataHistory'],
@@ -14,17 +19,21 @@ const Graph = () => {
   });
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <Card type="graphs">
+        <LoadingSpinner />
+      </Card>
+    );
   }
 
-  const waterHistory = HistoryData.historyValues.WATER_LEVEL.map(
+  const waterHistory = HistoryData.historyValues?.WATER_LEVEL?.map(
     (d: HistoryDataType) => ({
       ...d,
       type: 'WATER_LEVEL' as const,
       threshold: d.threshold === null ? 0 : d.threshold,
     })
   );
-  const illuminanceHistory = HistoryData.historyValues.LIGHT.map(
+  const illuminanceHistory = HistoryData.historyValues?.LIGHT?.map(
     (d: HistoryDataType) => ({
       ...d,
       type: 'ILLUMINANCE' as const,
@@ -43,19 +52,32 @@ const Graph = () => {
     <article className="p-45px rounded-contentsCard bg-ContentsColor">
       <div className="flex items-center gap-3">
         <ArticleTitle>수치 그래프</ArticleTitle>
-        <GraphInfoTooltip text="최근 n시간의 데이터만 그래프로 표기됩니다." />
+        <GraphInfoTooltip text="최근 15분의 데이터만 그래프로 표기됩니다." />
       </div>
       <CustomGraph
         type="WATER_LEVEL"
-        data={waterHistory.slice(0, 5)} // 5개까지만 그래프에 보여주도록 임시 설정
+        data={waterHistory.filter(
+          (item: HistoryDataType) =>
+            new Date(item.timestamp).getTime() >= cutoff
+        )}
         historyData={waterHistory}
       />
       <CustomGraph
         type="ILLUMINANCE"
-        data={illuminanceHistory}
+        data={illuminanceHistory.filter(
+          (item: HistoryDataType) =>
+            new Date(item.timestamp).getTime() >= cutoff
+        )}
         historyData={illuminanceHistory}
       />
-      <CustomGraph type="PH" data={pHHistory} historyData={pHHistory} />
+      <CustomGraph
+        type="PH"
+        data={pHHistory.filter(
+          (item: HistoryDataType) =>
+            new Date(item.timestamp).getTime() >= cutoff
+        )}
+        historyData={pHHistory}
+      />
     </article>
   );
 };
