@@ -19,9 +19,11 @@ const Button = ({
 
   const dynamicCss = {
     controls:
-      'rounded-3xl w-20 h-10 bg-ContentsColor px-4 py-1 text-xl transition hover:bg-slate-700/60 outline-none',
+      'rounded-3xl w-20 h-10 bg-ContentsColor px-4 py-1 text-xl transition hover:bg-slate-700/60 outline-none ' +
+      'disabled:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed',
     history:
-      'rounded-3xl w-20 h-10 bg-BackgroundColor hover:bg-slate-700/60 outline-none transition text-sm mt-5',
+      'rounded-3xl w-20 h-10 bg-BackgroundColor hover:bg-slate-700/60 outline-none transition text-sm mt-5 ' +
+      'disabled:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed',
   };
 
   return (
@@ -29,6 +31,7 @@ const Button = ({
       <button
         onClick={() => setShowModal(true)}
         className={`${dynamicCss[btnType]}`}
+        disabled={data === undefined}
       >
         {btnType === 'controls' ? '설정' : '기록 조회'}
       </button>
