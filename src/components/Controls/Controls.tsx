@@ -22,9 +22,8 @@ const Controls = () => {
   const rules = data ?? [];
   const getRulesByName = (name: string) =>
     rules.filter((item: RuleData) => item.ruleName === name);
-  const water = getRulesByName('water');
-  const illuminance = getRulesByName('illuminance');
-  const pH = getRulesByName('PH');
+  const LIGHT = getRulesByName('LIGHT');
+  const PH = getRulesByName('PH');
 
   // 규칙 생성 mutation
   const createMutation = useMutation({
@@ -70,8 +69,7 @@ const Controls = () => {
   });
   // 수정이 완료되면 센서데이터 카드도 새로고침하기
   const onSave = (data: number, id: number, type: string) => {
-    const unit =
-      type === 'water' ? water : type === 'illuminance' ? illuminance : pH;
+    const unit = type === 'LIGHT' ? LIGHT : PH;
     if (unit.length !== 0) {
       const newData = {
         ...unit[0],
@@ -79,14 +77,14 @@ const Controls = () => {
       };
       updateMutation.mutate({ ruleId: id, newData });
     } else {
-      const unitId = type === 'water' ? 1 : type === 'illuminance' ? 2 : 3;
+      const unitId = type === 'LIGHT' ? 2 : 3;
       const newCreateData = {
         ruleName: type,
         sensorId: unitId,
-        conditionOp: '테스트op', // 예: ">", "<", "=="
+        conditionOp: '==', // 예: ">", "<", "=="
         threshold: data,
-        actuatorId: type === 'illuminance' ? 5 : 4,
-        command: '테스트cd', // PH ON, PH OFF(자동 제어)
+        actuatorId: type === 'LIGHT' ? 5 : 4,
+        command: `${type} ON`, // PH ON, PH OFF(자동 제어)
         active: true,
       };
       createMutation.mutate(newCreateData);
@@ -96,22 +94,10 @@ const Controls = () => {
   const onDelete = (id: number) => deleteMutation.mutate({ ruleId: id });
   const controlConfigs = [
     {
-      label: '수위 제어',
-      type: 'water',
-      id: water[0]?.ruleId,
-      data: water,
-      onSave: (data: number, id: number, type: string) => {
-        onSave(data, id, type);
-      },
-      onDelete: (id: number) => {
-        onDelete(id);
-      },
-    },
-    {
       label: '조도 제어',
-      type: 'illuminance',
-      id: illuminance[0]?.ruleId,
-      data: illuminance,
+      type: 'LIGHT',
+      id: LIGHT[0]?.ruleId,
+      data: LIGHT,
       onSave: (data: number, id: number, type: string) => {
         onSave(data, id, type);
       },
@@ -120,10 +106,10 @@ const Controls = () => {
       },
     },
     {
-      label: 'pH 제어',
+      label: 'PH 제어',
       type: 'PH',
-      id: pH[0]?.ruleId,
-      data: pH,
+      id: PH[0]?.ruleId,
+      data: PH,
       onSave: (data: number, id: number, type: string) => {
         onSave(data, id, type);
       },
@@ -136,7 +122,7 @@ const Controls = () => {
   return (
     <article className="bg-ContentsColor p-45px rounded-contentsCard">
       <ArticleTitle>제어</ArticleTitle>
-      <div className="flex flex-col">
+      <div className="flex flex-col my-contentsCard gap-9">
         {controlConfigs.map((cfg) => (
           <Card type="controls" key={cfg.type}>
             <div className="m-16 flex justify-between flex-1">
