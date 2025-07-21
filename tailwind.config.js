@@ -14,7 +14,7 @@ export default {
         contentsCard: '1px',
         '45px': '45px',
         latestT: '2.5rem',
-        latestL: '15rem',
+        latestL: '11rem',
       },
       borderColor: {
         card: '#A1A1A1',
