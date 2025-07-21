@@ -5,6 +5,7 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 
 import { useQuery } from '@tanstack/react-query';
 import { getLatestSensorData, getDataHistory } from '@/apis/SensorAxios';
+import { getNotifications } from '@/apis/HistoryAxios';
 
 const SensorData = () => {
   // 최신 상태 조회 쿼리
@@ -12,12 +13,6 @@ const SensorData = () => {
 
   // 센서 데이터 업데이트 주기 10초
   // 그래프에 쓰이는 데이터는 3시간마다 줌. (초기 데이터 부족 시 3시간이 되지 않으면 현재 센서 데이터 값만 보내짐)
-
-  // TODO
-  // 알림 api에서 수위가 높거나 낮을때 알림이 날라오면 알림 내역에도 띄우고, 센서데이터 수위 카드에도 피그마 디자인보고 사용자가 물을 추가하거나 빼라고 안내문구 띄우기.
-  // 알림 api에서 알림을 넘겨줄때마다 프론트에서 어떻게 실시간으로 받을지 고민해야함.
-  // 새로운 알림이 오면 아이콘에 표시해주기.
-  // 그래프에는 15분까지의 데이터만을 표시 (너무 많으면 그래프가 부드럽게 렌더링 되지 않음)
 
   const {
     data: sensorData,
@@ -30,20 +25,60 @@ const SensorData = () => {
   });
 
   // 과거 이력 조회 쿼리
-  const { data: HistoryData } = useQuery({
+  const { data: historyData } = useQuery({
     queryKey: ['dataHistory'],
     queryFn: () => getDataHistory({ zoneId: 1 }),
     refetchInterval: 10 * 1000, // 10초 주기 (ms)
   });
 
-  if (isLoading || !HistoryData || !HistoryData.historyValues) {
-    return <LoadingSpinner />;
+  // 알림 목록 조회 쿼리
+  const { data: notiData, isLoading: notiIsLoading } = useQuery({
+    queryKey: ['notification'],
+    queryFn: () => getNotifications(),
+    refetchInterval: 10 * 1000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
+
+  const isWaterLow = notiData?.some(
+    (item: { message: string }) =>
+      item.message.includes('수위') && item.message.includes('정상')
+  )
+    ? false
+    : notiData?.some(
+        (item: { message: string }) =>
+          item.message.includes('수위') && item.message.includes('낮습니다')
+      );
+
+  // const isWaterHigher = notiData?.some(
+  //   (item: { message: string }) =>
+  //     item.message.includes('수위') && item.message.includes('정상')
+  // )
+  //   ? false
+  //   : notiData?.some(
+  //       (item: { message: string }) =>
+  //         item.message.includes('수위') && item.message.includes('높습니다')
+  //     );
+
+  const isWaterHigher = true;
+
+  if (
+    isLoading ||
+    !historyData ||
+    !historyData.historyValues ||
+    notiIsLoading
+  ) {
+    return (
+      <Card type="sensors">
+        <LoadingSpinner />
+      </Card>
+    );
   }
 
   // 가장 최근의 history 데이터가 배열 맨뒤에 추가된다고 가정함
-  const waterArr = HistoryData?.historyValues?.WATER_LEVEL ?? [];
-  const sunArr = HistoryData?.historyValues?.LIGHT ?? [];
-  const phArr = HistoryData?.historyValues?.PH ?? [];
+  const waterArr = historyData?.historyValues?.WATER_LEVEL ?? [];
+  const sunArr = historyData?.historyValues?.LIGHT ?? [];
+  const phArr = historyData?.historyValues?.PH ?? [];
 
   const waterHistory = waterArr[waterArr.length - 1]?.value ?? null;
   const sunHistory = sunArr[sunArr.length - 1]?.value ?? null; // 테스트를 위힌 임의 값 지정
@@ -60,6 +95,8 @@ const SensorData = () => {
           {(!isLoading || !isFetching) && (
             <SensorDataCard
               type="water"
+              isWaterLow={isWaterLow}
+              isWaterHigher={isWaterHigher}
               data={sensorData.latestValues.WATER_LEVEL.value}
               history={waterHistory}
             />
