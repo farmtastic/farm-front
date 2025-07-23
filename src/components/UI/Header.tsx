@@ -8,7 +8,7 @@ import Drawer from './Drawer';
 
 const Header = () => {
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
-  const [hasChanged, setHasChanged] = useState<boolean>(true);
+  const [hasChanged, setHasChanged] = useState<boolean>(false);
 
   // 알림 목록 조회 쿼리
   const { data, isLoading } = useQuery({

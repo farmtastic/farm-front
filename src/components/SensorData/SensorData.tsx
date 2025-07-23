@@ -5,7 +5,6 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 
 import { useQuery } from '@tanstack/react-query';
 import { getLatestSensorData, getDataHistory } from '@/apis/SensorAxios';
-import { getNotifications } from '@/apis/HistoryAxios';
 
 const SensorData = () => {
   // 최신 상태 조회 쿼리
@@ -31,43 +30,15 @@ const SensorData = () => {
     refetchInterval: 10 * 1000, // 10초 주기 (ms)
   });
 
-  // 알림 목록 조회 쿼리
-  const { data: notiData, isLoading: notiIsLoading } = useQuery({
-    queryKey: ['notification'],
-    queryFn: () => getNotifications(),
-    refetchInterval: 10 * 1000,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-  });
+  console.log('sensor', sensorData);
 
-  const isWaterLow = notiData?.some(
-    (item: { message: string }) =>
-      item.message.includes('수위') && item.message.includes('정상')
-  )
-    ? false
-    : notiData?.some(
-        (item: { message: string }) =>
-          item.message.includes('수위') && item.message.includes('낮습니다')
-      );
+  const isWaterLow =
+    sensorData?.latestValues?.WATER_LEVEL_BOTTOM?.value === 1 ? true : false;
 
-  // const isWaterHigher = notiData?.some(
-  //   (item: { message: string }) =>
-  //     item.message.includes('수위') && item.message.includes('정상')
-  // )
-  //   ? false
-  //   : notiData?.some(
-  //       (item: { message: string }) =>
-  //         item.message.includes('수위') && item.message.includes('높습니다')
-  //     );
+  const isWaterHigher =
+    sensorData?.latestValues?.WATER_LEVEL_TOP?.value === 1 ? true : false;
 
-  const isWaterHigher = true;
-
-  if (
-    isLoading ||
-    !historyData ||
-    !historyData.historyValues ||
-    notiIsLoading
-  ) {
+  if (isLoading || !historyData || !historyData.historyValues) {
     return (
       <Card type="sensors">
         <LoadingSpinner />
@@ -97,7 +68,7 @@ const SensorData = () => {
               type="water"
               isWaterLow={isWaterLow}
               isWaterHigher={isWaterHigher}
-              data={sensorData.latestValues.WATER_LEVEL.value}
+              data={sensorData?.latestValues?.WATER_LEVEL?.value}
               history={waterHistory}
             />
           )}
@@ -117,7 +88,7 @@ const SensorData = () => {
           {(!isLoading || !isFetching) && (
             <SensorDataCard
               type="PH"
-              data={sensorData.latestValues.PH.value}
+              data={sensorData?.latestValues?.PH?.value}
               history={pHHistory}
             />
           )}
