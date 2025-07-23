@@ -1,8 +1,15 @@
 import { IoTriangle } from 'react-icons/io5';
 import Rectangular from '../UI/Rectangular';
 import type { SensorDataType } from '@/types/type';
+import WaterLow from './WaterLow';
 
-const DiffStatus = ({ type, data, history }: SensorDataType) => {
+const DiffStatus = ({
+  type,
+  data,
+  history,
+  isWaterHigher,
+  isWaterLow,
+}: SensorDataType) => {
   const diff = data - history;
   const diffFixed = diff.toFixed(2);
 
@@ -12,19 +19,30 @@ const DiffStatus = ({ type, data, history }: SensorDataType) => {
 
   return (
     <>
-      <div className="w-[6vw]">
+      <div className={`relative w-[6vw]`}>
         <span className="text-3xl">{data}</span>
         <span className="text-3xl inline-block">
-          {type === 'water' ? 'm' : type === 'illuminance' ? 'lux' : ''}
+          {type === 'water' && isWaterHigher
+            ? '초과'
+            : type === 'water' && isWaterLow
+            ? '부족'
+            : type === 'water' && !isWaterHigher && !isWaterLow
+            ? '적정'
+            : type === 'illuminance'
+            ? 'lux'
+            : ''}
         </span>
         <div className="text-xl">
           {type === 'water' ? '수위' : type === 'illuminance' ? '조도' : 'pH'}
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center">
-        <div className="flex flex-col items-end w-full">
-          <div className="flex items-center">
-            <div>
+      {type === 'water' && (
+        <WaterLow isWaterHigher={isWaterHigher!} isWaterLow={isWaterLow!} />
+      )}
+      {type !== 'water' && (
+        <div className="flex flex-col min-w-28 items-center justify-center">
+          <div className="flex items-end w-full">
+            <div className="flex items-center">
               {history < data ? (
                 <IoTriangle color="#16BD80" className="mr-2" />
               ) : history > data ? (
@@ -43,7 +61,7 @@ const DiffStatus = ({ type, data, history }: SensorDataType) => {
           </div>
           <div className="text-sm px-1">({history !== null ? history : 0})</div>
         </div>
-      </div>
+      )}
     </>
   );
 };
