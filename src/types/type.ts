@@ -113,6 +113,7 @@ export interface CustomTooltipProps extends TooltipProps<number, string> {
       value: number;
       threshold: number;
       type: string;
+      status?: number;
     };
   }>;
 }
@@ -122,3 +123,14 @@ export type HistoryDataType = {
   value: number;
   threshold: number;
 };
+
+export interface WaterHistoryData {
+  threshold: undefined;
+  timestamp: string;
+  value: number;
+}
+
+export interface WaterGraphProps {
+  topData: WaterHistoryData[];
+  bottomData: WaterHistoryData[];
+}

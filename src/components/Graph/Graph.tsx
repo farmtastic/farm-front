@@ -6,10 +6,11 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 import type { HistoryDataType } from '@/types/type';
 import GraphInfoTooltip from './GraphInfoTooltip';
 import Card from '../UI/Card';
+import CustomWaterGraph from './CustomWaterGraph';
 
 const Graph = () => {
   const FIFTEEN_MINUTES = 16 * 60 * 1000;
-  // 기준 시각: 지금으로부터 16분 전
+  // 기준 시각: 지금으로부터 16분 전 (그래프는 15분까지의 데이터만 그려짐)
   const cutoff = Date.now() - FIFTEEN_MINUTES;
 
   // 과거 이력 조회 쿼리
@@ -26,13 +27,6 @@ const Graph = () => {
     );
   }
 
-  const waterHistory = HistoryData.historyValues?.WATER_LEVEL?.map(
-    (d: HistoryDataType) => ({
-      ...d,
-      type: 'WATER_LEVEL' as const,
-      threshold: d.threshold === null ? 0 : d.threshold,
-    })
-  );
   const illuminanceHistory = HistoryData.historyValues?.LIGHT?.map(
     (d: HistoryDataType) => ({
       ...d,
@@ -54,17 +48,13 @@ const Graph = () => {
         <ArticleTitle>수치 그래프</ArticleTitle>
         <GraphInfoTooltip text="최근 15분의 데이터만 그래프로 표기됩니다." />
       </div>
-      <CustomGraph
-        type="WATER_LEVEL"
-        data={waterHistory.filter(
-          (item: HistoryDataType) =>
-            new Date(item.timestamp).getTime() >= cutoff
-        )}
-        historyData={waterHistory}
+      <CustomWaterGraph
+        topData={HistoryData.historyValues.WATER_LEVEL_TOP}
+        bottomData={HistoryData.historyValues.WATER_LEVEL_BOTTOM}
       />
       <CustomGraph
         type="ILLUMINANCE"
-        data={illuminanceHistory.filter(
+        data={illuminanceHistory?.filter(
           (item: HistoryDataType) =>
             new Date(item.timestamp).getTime() >= cutoff
         )}
@@ -72,7 +62,7 @@ const Graph = () => {
       />
       <CustomGraph
         type="PH"
-        data={pHHistory.filter(
+        data={pHHistory?.filter(
           (item: HistoryDataType) =>
             new Date(item.timestamp).getTime() >= cutoff
         )}
