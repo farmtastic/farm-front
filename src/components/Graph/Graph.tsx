@@ -49,8 +49,18 @@ const Graph = () => {
         <GraphInfoTooltip text="최근 15분의 데이터만 그래프로 표기됩니다." />
       </div>
       <CustomWaterGraph
-        topData={HistoryData.historyValues.WATER_LEVEL_TOP}
-        bottomData={HistoryData.historyValues.WATER_LEVEL_BOTTOM}
+        topData={
+          HistoryData.historyValues.WATER_LEVEL_TOP?.filter(
+            (item: HistoryDataType) =>
+              new Date(item.timestamp).getTime() >= cutoff
+          ) ?? []
+        }
+        bottomData={
+          HistoryData.historyValues.WATER_LEVEL_BOTTOM?.filter(
+            (item: HistoryDataType) =>
+              new Date(item.timestamp).getTime() >= cutoff
+          ) ?? []
+        }
       />
       <CustomGraph
         type="ILLUMINANCE"
