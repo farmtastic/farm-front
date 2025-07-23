@@ -16,7 +16,7 @@ const LatestDataUpdate = () => {
       {!isLoading && (
         <span>
           최신 업데이트:{' '}
-          {formatTimestamp(sensorData.latestValues.WATER_LEVEL?.timestamp)}
+          {formatTimestamp(sensorData.latestValues.LIGHT?.timestamp)}
         </span>
       )}
     </div>
