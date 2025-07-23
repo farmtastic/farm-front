@@ -1,4 +1,5 @@
 import Warning from '@/components/Icon/warning_red.svg?react';
+import Warning_Green from '@/components/Icon/warning_green.svg?react';
 
 const WaterLow = ({
   isWaterLow,
@@ -8,17 +9,22 @@ const WaterLow = ({
   isWaterHigher: boolean;
 }) => {
   console.log(isWaterHigher, isWaterLow);
+
   return (
-    <div className="absolute -top-5 left-6 flex items-center gap-2">
-      <Warning />
-      <div className="bg-red-500 p-2 rounded-xl opacity-90">
-        {isWaterLow && (
-          <span>적정 수위보다 수위가 낮습니다. 물을 추가해주세요.</span>
-        )}
-        {isWaterHigher && (
-          <span>적정 수위보다 수위가 높습니다. 물을 빼주세요.</span>
-        )}
-      </div>
+    <div className={`flex flex-col items-center justify-center gap-2`}>
+      {!isWaterHigher && !isWaterLow && <Warning_Green />}
+      {(isWaterHigher || isWaterLow) && <Warning />}
+      {(isWaterHigher || isWaterLow) && (
+        <div className="text-red-500 w-28 text-base text-center">
+          {isWaterLow && <span>물이 비었습니다 추가해주세요</span>}
+          {isWaterHigher && <span>물이 꽉 찼습니다 제거해주세요</span>}
+        </div>
+      )}
+      {!isWaterHigher && !isWaterLow && (
+        <div className="w-28 text-base text-green-500 text-center">
+          현재 수위를 유지해주세요
+        </div>
+      )}
     </div>
   );
 };
