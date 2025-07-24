@@ -16,8 +16,7 @@ import Button from '@/components/UI/Button';
 const CustomGraph = ({ data, type, historyData }: CustomGraphProps) => {
   // 모달창과 단위 컴포넌트 z-index 수정해야함
 
-  const unit =
-    type === 'WATER_LEVEL' ? 'm' : type === 'ILLUMINANCE' ? 'lux' : '';
+  const unit = type === 'ILLUMINANCE' ? 'lux' : '';
 
   return (
     <div>
@@ -25,7 +24,7 @@ const CustomGraph = ({ data, type, historyData }: CustomGraphProps) => {
         <div className="text-3xl mb-graphB mt-graphT">
           {type === 'ILLUMINANCE' ? '조도' : 'pH'}
         </div>
-        <Button btnType="history" id={1} type="water" data={historyData} />
+        <Button btnType="history" id={1} type={type} data={historyData} />
       </div>
       <div className="relative">
         <div className="absolute right-16 top-0 flex justify-end mt-2 text-gray-400 text-xs z-10">
@@ -78,7 +77,7 @@ const CustomGraph = ({ data, type, historyData }: CustomGraphProps) => {
             표시할 데이터가 없습니다.
           </div>
         )}
-        <LineDescript />
+        <LineDescript type="none-water" />
       </div>
     </div>
   );
