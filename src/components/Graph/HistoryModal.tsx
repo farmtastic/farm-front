@@ -80,7 +80,7 @@ const HistoryModal = ({ isOpen, closeModal, data }: HistoryModalProps) => {
                 }
               >
                 <td className="px-8 py-3">
-                  {dayjs(item.timestamp).format('MM.DD HH:mm')}
+                  {dayjs(item.timestamp).format('MM.DD HH:mm:ss')}
                 </td>
                 <td className="p-3 text-right">
                   <span>{item.value}</span>
