@@ -12,10 +12,8 @@ export interface SensorDataAPIProps {
 export interface RuleData {
   ruleName: string;
   sensorId?: number;
-  conditionOp: string;
   threshold: number;
   actuatorId: number;
-  command: string;
   active: boolean;
 }
 
@@ -70,10 +68,21 @@ export interface ModalType {
   id: number;
 }
 
+export interface WaterHistoryData {
+  threshold: undefined;
+  timestamp: string;
+  value: number;
+}
+
+export type MergedState = {
+  timestamp: string;
+  status: number; // 0: 부족, 1: 적당, 2: 가득참
+};
+
 export interface STButtonType {
   btnType: 'controls' | 'history';
   type: 'water' | 'illuminance' | 'PH' | string;
-  data: ControlsDataType[] | HistoryType[];
+  data: ControlsDataType[] | HistoryType[] | MergedState[];
   onSave?: (data: number, id: number, type: string) => void;
   onDelete?: (id: number) => void;
   id: number;
@@ -124,12 +133,6 @@ export type HistoryDataType = {
   threshold: number;
 };
 
-export interface WaterHistoryData {
-  threshold: undefined;
-  timestamp: string;
-  value: number;
-}
-
 export interface WaterGraphProps {
   topData: WaterHistoryData[];
   bottomData: WaterHistoryData[];
@@ -140,5 +143,8 @@ export interface WaterGraphProps {
 export interface WaterHistoryModalProps {
   isOpen: boolean;
   closeModal: () => void;
-  data: WaterHistoryData[];
+  data: {
+    status: number;
+    timestamp: string;
+  }[];
 }
