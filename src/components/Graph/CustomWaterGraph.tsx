@@ -18,12 +18,14 @@ import CustomWaterTooltip from './CustomWaterTooltip';
 const CustomWaterGraph: React.FC<WaterGraphProps> = ({
   topData,
   bottomData,
+  // historyTOP,
+  // historyBOTTOM,
 }) => {
   dayjs.locale('ko');
   const data = waterStatusMapper(topData, bottomData);
+  // const allHistoryData = waterStatusMapper(historyTOP, historyBOTTOM);
 
   const formatTime = (ts: string) => dayjs(ts).format('HH:mm');
-
   return (
     <div className="mt-11">
       <div className="text-3xl mb-graphB mt-graphT">수위</div>

@@ -61,6 +61,8 @@ const Graph = () => {
               new Date(item.timestamp).getTime() >= cutoff
           ) ?? []
         }
+        historyTOP={HistoryData.historyValues.WATER_LEVEL_TOP}
+        historyBOTTOM={HistoryData.historyValues.WATER_LEVEL_BOTTOM}
       />
       <CustomGraph
         type="ILLUMINANCE"

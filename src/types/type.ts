@@ -133,4 +133,12 @@ export interface WaterHistoryData {
 export interface WaterGraphProps {
   topData: WaterHistoryData[];
   bottomData: WaterHistoryData[];
+  historyTOP: WaterHistoryData[];
+  historyBOTTOM: WaterHistoryData[];
+}
+
+export interface WaterHistoryModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  data: WaterHistoryData[];
 }
