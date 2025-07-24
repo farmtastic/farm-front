@@ -18,12 +18,11 @@ const Controls = () => {
     queryFn: () => getRules(),
   });
 
-  console.log('rules data', data);
   const rules = data ?? [];
   const getRulesByName = (name: string) =>
     rules.filter((item: RuleData) => item.ruleName === name);
-  const LIGHT = getRulesByName('LIGHT');
-  const PH = getRulesByName('PH');
+  const LIGHT = getRulesByName('조명 자동 조절');
+  const PH = getRulesByName('ph 자동 조절');
 
   // 규칙 생성 mutation
   const createMutation = useMutation({
