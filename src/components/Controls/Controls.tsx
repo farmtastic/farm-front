@@ -77,13 +77,13 @@ const Controls = () => {
       };
       updateMutation.mutate({ ruleId: id, newData });
     } else {
-      const unitId = type === 'LIGHT' ? 2 : 3;
+      const unitId = type === 'LIGHT' ? 3 : 4;
       const newCreateData = {
         ruleName: type,
         sensorId: unitId,
         conditionOp: '==', // 예: ">", "<", "=="
         threshold: data,
-        actuatorId: type === 'LIGHT' ? 5 : 4,
+        actuatorId: type === 'LIGHT' ? 5 : 6,
         command: `${type} ON`, // PH ON, PH OFF(자동 제어)
         active: true,
       };
