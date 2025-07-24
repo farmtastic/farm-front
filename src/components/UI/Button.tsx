@@ -1,7 +1,13 @@
-import type { HistoryType, STButtonType, ControlsDataType } from '@/types/type';
+import type {
+  HistoryType,
+  STButtonType,
+  ControlsDataType,
+  MergedState,
+} from '@/types/type';
 import ThresholdModal from '@/components/Controls/ThresholdModal';
 import HistoryModal from '../Graph/HistoryModal';
 import { useState } from 'react';
+import WaterHIstoryModal from '../Graph/WaterHIstoryModal';
 
 const Button = ({
   btnType,
@@ -35,7 +41,14 @@ const Button = ({
       >
         {btnType === 'controls' ? '설정' : '기록 조회'}
       </button>
-      {showModal && btnType === 'history' && (
+      {showModal && type === 'WATER_LEVEL' && btnType === 'history' && (
+        <WaterHIstoryModal
+          isOpen={showModal}
+          closeModal={closeModal}
+          data={data as MergedState[]}
+        />
+      )}
+      {showModal && btnType === 'history' && type !== 'WATER_LEVEL' && (
         <HistoryModal
           isOpen={showModal}
           closeModal={closeModal}
