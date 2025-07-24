@@ -72,7 +72,7 @@ const ThresholdModal = ({
             className="w-full bg-transparent pl-2 border-gray-100 text-2xl font-medium text-white focus:border-green-400 focus:outline-none transition"
           />
           <span className="ml-2 text-xl text-gray-300">
-            {type === 'water' ? 'm' : type === 'illuminance' ? 'lux' : 'pH'}
+            {type === 'water' ? 'm' : type === 'LIGHT' ? 'lux' : 'pH'}
           </span>
         </div>
         <div className="flex gap-10">
