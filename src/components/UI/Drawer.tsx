@@ -23,7 +23,7 @@ const CustomDrawer = ({ showDrawer, onClose, data }: DrawerProps) => {
       <ul className="divide-y divide-gray-800">
         {data.map((item) => (
           <li
-            key={item.createdAt}
+            key={`${item.createdAt} ${item.message}`}
             className="px-7 py-4 flex flex-col gap-1 hover:bg-BackgroundColor transition"
           >
             <span className="text-2xl text-gray-400">
