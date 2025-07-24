@@ -4,7 +4,7 @@ import type { CustomTooltipProps } from '@/types/type';
 const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     const { timestamp, value, threshold, type } = payload[0].payload;
-    const date = dayjs(timestamp).format('MM.DD HH:mm');
+    const date = dayjs(timestamp).format('MM.DD HH:mm:ss');
     const unit =
       type === 'WATER_LEVEL' ? 'm' : type === 'ILLUMINENCE' ? 'lux' : '';
     return (

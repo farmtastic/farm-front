@@ -78,7 +78,7 @@ const Controls = () => {
     } else {
       const unitId = type === 'LIGHT' ? 3 : 4;
       const newCreateData = {
-        ruleName: type,
+        ruleName: type === 'LIGHT' ? '조명 자동 조절' : 'ph 자동 조절',
         sensorId: unitId,
         threshold: data,
         actuatorId: type === 'LIGHT' ? 5 : 6,
