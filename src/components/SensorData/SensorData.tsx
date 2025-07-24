@@ -30,13 +30,17 @@ const SensorData = () => {
     refetchInterval: 10 * 1000, // 10초 주기 (ms)
   });
 
-  console.log('sensor', sensorData);
-
   const isWaterLow =
-    sensorData?.latestValues?.WATER_LEVEL_BOTTOM?.value === 1 ? true : false;
+    sensorData?.latestValues?.WATER_LEVEL_BOTTOM?.value === 0 &&
+    sensorData?.latestValues?.WATER_LEVEL_TOP?.value === 1
+      ? true
+      : false;
 
   const isWaterHigher =
-    sensorData?.latestValues?.WATER_LEVEL_TOP?.value === 1 ? true : false;
+    sensorData?.latestValues?.WATER_LEVEL_TOP?.value === 0 &&
+    sensorData?.latestValues?.WATER_LEVEL_BOTTOM?.value === 1
+      ? true
+      : false;
 
   if (isLoading || !historyData || !historyData.historyValues) {
     return (

@@ -23,11 +23,11 @@ const DiffStatus = ({
         <span className="text-3xl">{data}</span>
         <span className="text-3xl inline-block">
           {type === 'water' && isWaterHigher
-            ? '초과'
+            ? 'FULL'
             : type === 'water' && isWaterLow
-            ? '부족'
+            ? 'EMPTY'
             : type === 'water' && !isWaterHigher && !isWaterLow
-            ? '적정'
+            ? 'NOMAL'
             : type === 'illuminance'
             ? 'lux'
             : ''}
