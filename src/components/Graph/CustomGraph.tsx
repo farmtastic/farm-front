@@ -23,11 +23,7 @@ const CustomGraph = ({ data, type, historyData }: CustomGraphProps) => {
     <div>
       <div className="flex items-center gap-3">
         <div className="text-3xl mb-graphB mt-graphT">
-          {type === 'WATER_LEVEL'
-            ? '수위'
-            : type === 'ILLUMINANCE'
-            ? '조도'
-            : 'pH'}
+          {type === 'ILLUMINANCE' ? '조도' : 'pH'}
         </div>
         <Button btnType="history" id={1} type="water" data={historyData} />
       </div>

@@ -26,6 +26,7 @@ const CustomWaterGraph: React.FC<WaterGraphProps> = ({
 
   return (
     <div className="mt-11">
+      <div className="text-3xl mb-graphB mt-graphT">수위</div>
       {data && data.length > 0 ? (
         <ResponsiveContainer width="100%" height={370}>
           <LineChart
