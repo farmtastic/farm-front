@@ -81,7 +81,7 @@ const Controls = () => {
       const newCreateData = {
         ruleName: type,
         sensorId: unitId,
-        conditionOp: '==', // 예: ">", "<", "=="
+        conditionOp: '>', // 예: ">", "<", "=="
         threshold: data,
         actuatorId: type === 'LIGHT' ? 5 : 6,
         command: `${type} ON`, // PH ON, PH OFF(자동 제어)
