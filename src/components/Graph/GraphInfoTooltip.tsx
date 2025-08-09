@@ -1,6 +1,7 @@
 import WarningIcon from '@/components/Icon/warning_orange.svg?react';
 import { Tooltip } from 'react-tooltip';
 
+// 그래프 요소 툴팁 컴포넌트
 const GraphInfoTooltip = ({ text }: { text: string }) => {
   return (
     <div>

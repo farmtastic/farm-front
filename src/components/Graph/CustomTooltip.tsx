@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import type { CustomTooltipProps } from '@/types/type';
 
+// 조도, pH 그래프 커스텀 툴팁 컴포넌트
 const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     const { timestamp, value, threshold, type } = payload[0].payload;

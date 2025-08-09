@@ -2,6 +2,7 @@ import Warning from '@/components/Icon/warning_red.svg?react';
 import Warning_Green from '@/components/Icon/warning_green.svg?react';
 import Warning_Orange from '@/components/Icon/warning_orange.svg?react';
 
+// 현재 수위의 상태를 나타내는 컴포넌트
 const WaterLow = ({
   isWaterLow,
   isWaterHigher,

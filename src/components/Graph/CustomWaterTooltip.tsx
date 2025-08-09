@@ -2,6 +2,7 @@ import type { CustomTooltipProps } from '@/types/type';
 import dayjs from 'dayjs';
 import { formatStatus } from '@/utils/formatStatus';
 
+// 수위 그래프 커스텀 툴팁 컴포넌트
 const CustomWaterTooltip = ({ active, payload }: CustomTooltipProps) => {
   if (!active || !payload?.length) return null;
   const { timestamp, status } = payload[0].payload;

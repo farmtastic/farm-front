@@ -17,6 +17,7 @@ import CustomWaterTooltip from './CustomWaterTooltip';
 import Button from '../UI/Button';
 import LineDescript from './LineDescript';
 
+// 수위 그래프 커스텀 컴포넌트
 const CustomWaterGraph: React.FC<WaterGraphProps> = ({
   topData,
   bottomData,

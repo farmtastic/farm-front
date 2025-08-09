@@ -2,6 +2,7 @@ import Drawer from '@mui/material/Drawer';
 import type { DrawerProps } from '@/types/type';
 import { formatKoreanTimestamp } from '@/utils/formatKoreanTimestamp';
 
+// 알림 Drawer 컴포넌트
 const CustomDrawer = ({ showDrawer, onClose, data }: DrawerProps) => {
   return (
     <Drawer

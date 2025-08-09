@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import type { Styles } from 'react-modal';
 import dayjs from 'dayjs';
 
+// 수위 기록조회 컴포넌트 (수위와 조도, pH의 그래프 및 기록 조회 구조가 달라 수위 컴포넌트만 따로 분리함)
 const WaterHIstoryModal = ({
   isOpen,
   closeModal,

@@ -3,6 +3,7 @@ import Rectangular from '../UI/Rectangular';
 import type { SensorDataType } from '@/types/type';
 import WaterLow from './WaterLow';
 
+// 센서 데이터 값들의 상태를 비교하고 나타내는 컴포넌트
 const DiffStatus = ({
   type,
   data,

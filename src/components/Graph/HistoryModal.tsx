@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import type { Styles } from 'react-modal';
 import dayjs from 'dayjs';
 
+// 기록 조회 모달 컴포넌트
 const HistoryModal = ({ isOpen, closeModal, data }: HistoryModalProps) => {
   const customStyle: Styles = {
     overlay: {

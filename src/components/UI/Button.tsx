@@ -9,6 +9,7 @@ import HistoryModal from '../Graph/HistoryModal';
 import { useState } from 'react';
 import WaterHIstoryModal from '../Graph/WaterHIstoryModal';
 
+// 임계값 설정, 기록 조회 공통 버튼 컴포넌트
 const Button = ({
   btnType,
   id,

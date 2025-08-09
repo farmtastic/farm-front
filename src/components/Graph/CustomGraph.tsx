@@ -13,9 +13,8 @@ import LineDescript from './LineDescript';
 import type { CustomGraphProps } from '@/types/type';
 import Button from '@/components/UI/Button';
 
+// 조도, pH 그래프 커스텀 컴포넌트
 const CustomGraph = ({ data, type, historyData }: CustomGraphProps) => {
-  // 모달창과 단위 컴포넌트 z-index 수정해야함
-
   const unit = type === 'ILLUMINANCE' ? 'lux' : '';
 
   return (

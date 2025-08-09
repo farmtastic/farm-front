@@ -66,7 +66,7 @@ const Controls = () => {
       alert('규칙 삭제 실패');
     },
   });
-  // 수정이 완료되면 센서데이터 카드도 새로고침하기
+
   const onSave = (data: number, id: number, type: string) => {
     const unit = type === 'LIGHT' ? LIGHT : PH;
     if (unit.length !== 0) {

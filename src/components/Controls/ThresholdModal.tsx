@@ -3,6 +3,7 @@ import type { Styles } from 'react-modal';
 import type { ModalType } from '@/types/type';
 import { useState } from 'react';
 
+// 임계값 설정 모달 컴포넌트
 const ThresholdModal = ({
   id,
   type,

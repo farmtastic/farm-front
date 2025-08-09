@@ -1,3 +1,4 @@
+// 그래프 요소 설명 컴포넌트
 const LineDescript = ({ type }: { type: 'water' | 'none-water' }) => {
   return (
     <div className="absolute left-16 bottom-2 p-1 flex items-center gap-6 text-xs ">
