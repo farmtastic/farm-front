@@ -1,44 +1,47 @@
-📝 커밋 컨벤션
-모든 커밋 메시지는 통일된 규칙을 따릅니다.
+# 팜타스틱 - 스마트팜 원격 제어 시스템
 
-💡 커밋 메시지 규칙
-<타입>[적용범위]: <설명>
+## 📌 개요
 
-예시: Feat[FE]: 로그인 기능 추가 (API 연결 필요)
+스마트 정보기술을 활용해 작물 재배 시설의 데이터를 측정·분석하고, 제어 장치 자동 조절을 통해 효율적인 관리 방안을 마련하기 위해 스마트 원격 제어 시스템 구축 프로젝트가 필요하다는 회사측의 제안서를 바탕으로 프로젝트를 진행하였습니다.
 
-🏷️ 커밋 타입 (Commit Types)
-첫 글자는 대문자로 시작하는 Capitalize 방식을 사용합니다.
+- **목표**: 스마트팜 센서 데이터 모니터링 및 제어 기능 제공
+- **기간**: 2025.06 ~ 2025.08 (약 8주)
+- **팀 구성**: 프론트엔드 1, 백엔드 3
 
-Feat: 새로운 기능 추가 또는 기존 기능에 대한 추가 구현
+## ⭐ 주요 기능
 
-Fix: 버그 수정
+- **메인 페이지**
 
-Remove: 파일 삭제
+- **임계값 설정 모달창** : 사용자가 직접 임계값을 설정하여 원하는 자동 제어 수치를 입력함
 
-Docs: 문서(Documentation) 관련 파일 변경
+<!-- ![임계값 설정](https://github.com/user-attachments/assets/db296fbf-ef1f-4570-9fed-702b38aaca81) -->
 
-Refactor: 기능 변경 없이 코드 구조만 변경 (리팩토링)
+- **알림창**
 
-Test: 테스트 코드 수정 또는 추가
+- **센서 데이터 기록 조회 모달창**
 
-Rename: 파일 또는 디렉토리 이름/위치 변경
+## 🛠 기술 스택
 
-Comment: 코드 내 주석 추가 및 변경
+### Frontend (담당)
 
-Ci: CI(Continuous Integration) 관련 설정 수정 (현재는 미정)
+- **Language** : JavaScript, TypeScript
+- **Library & Framework**: React, Vite, Tailwind CSS, Axios, Recharts
 
-Design: 화면 구성 또는 UI 변경
+### Backend
 
-Style: 코딩 컨벤션(스타일) 수정 (예: 코드 포맷팅)
+- **Language** : Java
+- **Library & Framework**: Spring Boot
+- **Database** : PostgreSQL
+- **ORM**: JPA
 
-Chore: 분류하기 애매한 기타 변경사항, 패키지 및 빌드 관련 커밋 (주로 프로젝트 설정)
+### Hardware & Embedded
 
+- **Language** : C++
+- **Hardware** : Raspberry Pi 3, 수위 센서, 조도 센서, pH 센서
 
-Build: 빌드 시스템 또는 외부 종속성 관련 변경 (예: npm, yarn 설정)
+## 💻 담당 업무
 
-🎯 적용 범위 (Scope) 지정
-커밋이 영향을 미치는 범위를 명시합니다.
-
-도메인 + 기능: Feat(navbar): [FE] 네비게이션바 생성
-도메인만: Feat: [FE] 네비게이션바 생성
-기능만: Feat(navbar): 네비게이션바 생성
+- UI 설계 및 구현
+- 백엔드 API 연동 및 테스트
+- 실시간 데이터 처리(polling 방식 적용)
+- 센서 데이터 시각화
