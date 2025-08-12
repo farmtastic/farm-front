@@ -1,54 +1,47 @@
-# React + TypeScript + Vite
+# 팜타스틱 - 스마트팜 원격 제어 시스템
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 개요
 
-Currently, two official plugins are available:
+스마트 정보기술을 활용해 작물 재배 시설의 데이터를 측정·분석하고, 제어 장치 자동 조절을 통해 효율적인 관리 방안을 마련하기 위해 스마트 원격 제어 시스템 구축 프로젝트가 필요하다는 회사측의 제안서를 바탕으로 프로젝트를 진행하였습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **목표**: 스마트팜 센서 데이터 모니터링 및 제어 기능 제공
+- **기간**: 2025.06 ~ 2025.08 (약 8주)
+- **팀 구성**: 프론트엔드 1, 백엔드 3
 
-## Expanding the ESLint configuration
+## ⭐ 주요 기능
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **메인 페이지**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **임계값 설정 모달창** : 사용자가 직접 임계값을 설정하여 원하는 자동 제어 수치를 입력함
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+<!-- ![임계값 설정](https://github.com/user-attachments/assets/db296fbf-ef1f-4570-9fed-702b38aaca81) -->
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **알림창**
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **센서 데이터 기록 조회 모달창**
+
+## 🛠 기술 스택
+
+### Frontend (담당)
+
+- **Language** : JavaScript, TypeScript
+- **Library & Framework**: React, Vite, Tailwind CSS, Axios, Recharts
+
+### Backend
+
+- **Language** : Java
+- **Library & Framework**: Spring Boot
+- **Database** : PostgreSQL
+- **ORM**: JPA
+
+### Hardware & Embedded
+
+- **Language** : C++
+- **Hardware** : Raspberry Pi 3, 수위 센서, 조도 센서, pH 센서
+
+## 💻 담당 업무
+
+- UI 설계 및 구현
+- 백엔드 API 연동 및 테스트
+- 실시간 데이터 처리(polling 방식 적용)
+- 센서 데이터 시각화

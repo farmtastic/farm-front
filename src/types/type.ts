@@ -1,5 +1,150 @@
 import React from 'react';
+import type { TooltipProps } from 'recharts';
 
 export type Children = {
   children: React.ReactNode;
 };
+
+export interface SensorDataAPIProps {
+  zoneId: number;
+}
+
+export interface RuleData {
+  ruleName: string;
+  sensorId?: number;
+  threshold: number;
+  actuatorId: number;
+  active: boolean;
+}
+
+export interface RulesProps {
+  ruleId?: number;
+  newData?: RuleData;
+}
+
+type CardTypes = 'sensors' | 'controls' | 'graphs';
+
+export interface Type {
+  type: CardTypes;
+}
+
+export type CardProps = Children & Type;
+
+export interface SensorDataProps {
+  data: number;
+  history: number;
+}
+
+export type ControlsDataType = {
+  ruleName: string;
+  sensorId: number;
+  conditionOp: string;
+  threshold: number;
+  actuatorId: number;
+  command: string;
+  active: boolean;
+};
+
+export type HistoryType = {
+  timestamp: string;
+  value: number;
+  type: 'WATER_LEVEL' | 'ILLUMINANCE' | 'PH';
+  threshold: number;
+};
+
+export interface HistoryModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  data: HistoryType[];
+}
+
+export interface ModalType {
+  type: 'water' | 'illuminance' | 'PH' | string;
+  isOpen: boolean;
+  closeModal: () => void;
+  data: ControlsDataType[];
+  onSave: (saveData: number, id: number, type: string) => void;
+  onDelete: (id: number) => void;
+  id: number;
+}
+
+export interface WaterHistoryData {
+  threshold: undefined;
+  timestamp: string;
+  value: number;
+}
+
+export type MergedState = {
+  timestamp: string;
+  status: number; // 0: 부족, 1: 적당, 2: 가득참
+};
+
+export interface STButtonType {
+  btnType: 'controls' | 'history';
+  type: 'water' | 'illuminance' | 'PH' | string;
+  data: ControlsDataType[] | HistoryType[] | MergedState[];
+  onSave?: (data: number, id: number, type: string) => void;
+  onDelete?: (id: number) => void;
+  id: number;
+}
+
+export interface SensorDataType {
+  type: 'water' | 'illuminance' | 'PH';
+  data: number;
+  history: number;
+  isWaterLow?: boolean;
+  isWaterHigher?: boolean;
+}
+
+export interface NotiDataType {
+  createdAt: string;
+  message: string;
+  read: boolean;
+}
+
+export interface DrawerProps {
+  showDrawer: boolean;
+  onClose: () => void;
+  data: NotiDataType[];
+}
+
+export interface CustomGraphProps {
+  data: HistoryType[];
+  historyData: HistoryType[];
+  type: 'WATER_LEVEL' | 'ILLUMINANCE' | 'PH';
+}
+
+// CustomTooltip의 Props 타입
+export interface CustomTooltipProps extends TooltipProps<number, string> {
+  payload?: Array<{
+    payload: {
+      timestamp: string;
+      value: number;
+      threshold: number;
+      type: string;
+      status?: number;
+    };
+  }>;
+}
+
+export type HistoryDataType = {
+  timestamp: string;
+  value: number;
+  threshold: number;
+};
+
+export interface WaterGraphProps {
+  topData: WaterHistoryData[];
+  bottomData: WaterHistoryData[];
+  historyTOP: WaterHistoryData[];
+  historyBOTTOM: WaterHistoryData[];
+}
+
+export interface WaterHistoryModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  data: {
+    status: number;
+    timestamp: string;
+  }[];
+}
